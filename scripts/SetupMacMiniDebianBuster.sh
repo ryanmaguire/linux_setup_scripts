@@ -65,6 +65,9 @@ sudo ./install.sh
 # Change directory back to downloads.
 cd ~/Downloads
 
+# Install GNOME Builder (or VS Code).
+yes | sudo apt-get install gnome-builder
+
 # Install signal. These are the comments from signal.
 
 # NOTE: These instructions only work for 64 bit Debian-based

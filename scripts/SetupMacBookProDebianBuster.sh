@@ -60,6 +60,9 @@ yes | sudo apt-get install curl
 yes | sudo apt-get install git
 yes | sudo apt-get update
 
+# Install GNOME Builder (or VS Code).
+yes | sudo apt-get install gnome-builder
+
 # Install signal. These are the comments from signal.
 
 # NOTE: These instructions only work for 64 bit Debian-based
