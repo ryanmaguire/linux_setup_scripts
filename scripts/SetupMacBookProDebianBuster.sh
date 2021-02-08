@@ -80,7 +80,7 @@ echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" |\
 yes | sudo apt update && sudo apt install signal-desktop
 
 # Install nordvpn.
-wget https://rep.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
+wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
 yes | sudo apt-get install ./nordvpn-release_1.0.0_all.deb
 yes | sudo apt-get update
 yes | sudo apt-get install nordvpn
@@ -104,7 +104,7 @@ yes | sudo apt-get update
 sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
 
 # Install LaTeX.
-yes | sudo apt-get install tex-live full
+yes | sudo apt-get install texlive-full
 
 # Run this in case anything broke.
 yes | sudo apt-get --fix-broken install

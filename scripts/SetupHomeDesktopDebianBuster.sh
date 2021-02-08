@@ -2,7 +2,7 @@
 
 #	SETUP SCRIPT.
 # OS:		Debian 10 Buster.
-# Device:	Mid 2011 Mac Mini.
+# Device:	Mid 2017 iMac 27" 5K Retina Display.
 
 # Give sudo permission to user.
 # Go to /etc/sudoers. You'll need root permissions so:
@@ -24,8 +24,9 @@ yes | sudo apt-get dist-upgrade
 yes | sudo apt-get full-upgrade
 yes | sudo apt-get update
 
-# To add calendars for Microsoft Exchange add evolution-ews. On Buster this is
-# available on backports. Add to /etc/apt/sources.list:
+# To add calendars for Microsoft Exchange (UML and Dartmouth)
+# add evolution-ews. On Buster this is available on backports.
+# Add to /etc/apt/sources.list:
 echo -e "\n# Needed for evolution-ews." | sudo tee -a /etc/apt/sources.list
 echo "deb http://ftp.debian.org/debian buster-backports main" |\
   sudo tee -a /etc/apt/sources.list
@@ -91,9 +92,15 @@ yes | sudo apt-get update
 yes | sudo apt-get install nordvpn
 yes | sudo apt-get update
 
-# Install the NoobsLab flat-remix theme.
-wget https://launchpad.net/~noobslab/+archive/ubuntu/themes/+files/flat-remix-gs-theme_3.12-1~xenial~NoobsLab.com_all.deb
-yes | sudo apt-get install ./flat-remix-gs-theme_3.12-1~xenial~NoobsLab.com_all.deb
+# Install qbittorrent.
+yes | sudo apt-get update
+yes | sudo apt-get install qbittorrent
+
+# Install zoom.
+yes | sudo apt-get update
+wget https://zoom.us/client/latest/zoom_amd64.deb
+yes | sudo apt-get install ./zoom_amd64.deb
+yes | sudo apt-get update
 
 # Install Calibre (book library).
 sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
@@ -203,22 +210,14 @@ cd ~
 # After removing the old kernel files, you may need to reinstall
 # the touch pad drivers. These should still be in Downloads.
 
-# OLD
+# Change the default resolution with xrandr.
+#   cvt 2560 1440
 
-# Install wifi driver. Go to software app and add non-free repositories.
-# This driver is dated. Do not use if wifi is needed. Use the ones above.
-# yes | sudo apt-get install firmware-b43-installer
+# This gave:
+# 2560x1440 59.96 Hz (CVT 3.69M9) hsync: 89.52 kHz; pclk: 312.25 MHz
+#   Modeline "2560x1440_60.00"  312.25  2560 2752 3024 3488  1440 1443 1448 1493 -hsync +vsync
 
-# Fix mac address problem. Go to /etc/NetworkManager/NetworkManager.conf
-# Add the lines:
-#       [device]
-#       wifi.scan-rand-mac-address=no
-
-# Save and run:
-# sudo systemctl restart NetworkManager
-# /etc/init.d/network-manager restart
-
-# Go to /etc/network/
-#       sudo nano interfaces
-# Comment out the line:
-#       source /etc/network/interfaces.d/*
+# Grab the output and pass it to xrandr.
+#   xrandr --newmode "2560x1440_60.00" 312.25 2560 2752 3024 3488  1440 1443 1448 1493 -hsync +vsync
+#   xrandr --addmode XWAYLAND0 "2560x1440"
+#   xrandr --output XWAYLAND0 --mode "2560x1440"

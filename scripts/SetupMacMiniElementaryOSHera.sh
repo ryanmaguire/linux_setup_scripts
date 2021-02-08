@@ -65,7 +65,7 @@ yes | sudo apt-get install ./caprine_2.52.0_amd64.deb
 yes | sudo apt-get update
 
 # Install nordvpn.
-wget https://rep.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
+wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
 yes | sudo apt-get install ./nordvpn-release_1.0.0_all.deb
 yes | sudo apt-get update
 yes | sudo apt-get install nordvpn
