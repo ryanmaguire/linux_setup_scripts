@@ -2,7 +2,13 @@
 
 #	SETUP SCRIPT.
 # OS:		Debian 10 Buster.
-# Device:	Mid 2017 iMac 27" 5K Retina Display.
+# Device:	Custom Desktop Computer
+#	CPU:	AMD Ryzen 3900 12-core
+#	GPU:	Power Color rx 570
+#	RAM:	Ripjaw DDR4-3600 16GBx2
+#	MB:	Gigabyte Aorus x570 Elite WiFi
+
+# Must add NON-FREE firmware for graphics card and WiFi antenna.
 
 # Give sudo permission to user.
 # Go to /etc/sudoers. You'll need root permissions so:
