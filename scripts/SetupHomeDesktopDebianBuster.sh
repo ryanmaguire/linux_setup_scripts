@@ -169,6 +169,44 @@ rm -f ~/Downloads/*.deb
 yes | sudo apt-get update
 cd ~
 
+# The following errors occured:
+# W: Possible missing firmware /lib/firmware/amdgpu/vega20_asd.bin for module amdgpu
+# W: Possible missing firmware /lib/firmware/amdgpu/vega20_sos.bin for module amdgpu
+# W: Possible missing firmware /lib/firmware/amdgpu/vega20_rlc.bin for module amdgpu
+# W: Possible missing firmware /lib/firmware/amdgpu/vega20_mec2.bin for module amdgpu
+# W: Possible missing firmware /lib/firmware/amdgpu/vega20_mec.bin for module amdgpu
+# W: Possible missing firmware /lib/firmware/amdgpu/vega20_me.bin for module amdgpu
+# W: Possible missing firmware /lib/firmware/amdgpu/vega20_pfp.bin for module amdgpu
+# W: Possible missing firmware /lib/firmware/amdgpu/vega20_ce.bin for module amdgpu
+# W: Possible missing firmware /lib/firmware/amdgpu/vega20_sdma1.bin for module amdgpu
+# W: Possible missing firmware /lib/firmware/amdgpu/vega20_sdma.bin for module amdgpu
+# W: Possible missing firmware /lib/firmware/amdgpu/vega20_uvd.bin for module amdgpu
+# W: Possible missing firmware /lib/firmware/amdgpu/vega20_vce.bin for module amdgpu
+# W: Possible missing firmware /lib/firmware/amdgpu/vega20_smc.bin for module amdgpu
+
+# Needed to run the following from https://wiki.debian.org/AtiHowTo
+echo -e "\n# Needed for amdgpu." | sudo tee -a /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian buster contrib non-free" |\
+  sudo tee -a /etc/apt/sources.list
+echo "deb-src http://deb.debian.org/debian buster contrib non-free" |\
+  sudo tee -a /etc/apt/sources.list
+yes | sudo apt-get update
+yes | sudo apt-get install firmware-amd-graphics
+yes | sudo apt-get install libgl1-mesa-dri
+yes | sudo apt-get install libglx-mesa0
+yes | sudo apt-get install mesa-vulkan-drivers
+yes | sudo apt-get install xserver-xorg-video-all
+
+# Needed for the wifi and bluetooth antenna that came with the motherboard.
+yes | sudo apt-get install firmware-iwlwifi
+
+# Needed to use UPnP with home server.
+yes | sudo apt-get install vlc
+yes | sudo apt-get update
+yes | sudo apt-get upgrade
+yes | sudo apt-get autoremove
+yes | sudo apt-get autoclean
+
 # MANUAL THINGS.
 # Set ctrl+up and ctrl+down to change workspace.
 # Go to mouse/touchpad settings and enable tap-to-click.
@@ -189,18 +227,8 @@ cd ~
 #    Trasnparent OSD
 #    Enable user themes.
 
-# Optional.
-# Install VLC. Works great. Rhythmbox and GNOME videos are sufficient, however.
-
 # Install Jami. Pretty buggy, couldn't get to work.
 # Signal now has voice and video calls, so this is unnecessary.
-
-# These drivers work very well.
-# yes | sudo apt-get update
-# yes | sudo apt-get install broadcom-sta-common
-# yes | sudo apt-get install broadcom-sta-source
-# yes | sudo apt-get install broadcom-sta-dkms
-# Most likely I'll just use ethernet, so this is unnecessary.
 
 # Remove old kernel files we no longer need.
 # uname -r
@@ -215,15 +243,3 @@ cd ~
 
 # After removing the old kernel files, you may need to reinstall
 # the touch pad drivers. These should still be in Downloads.
-
-# Change the default resolution with xrandr.
-#   cvt 2560 1440
-
-# This gave:
-# 2560x1440 59.96 Hz (CVT 3.69M9) hsync: 89.52 kHz; pclk: 312.25 MHz
-#   Modeline "2560x1440_60.00"  312.25  2560 2752 3024 3488  1440 1443 1448 1493 -hsync +vsync
-
-# Grab the output and pass it to xrandr.
-#   xrandr --newmode "2560x1440_60.00" 312.25 2560 2752 3024 3488  1440 1443 1448 1493 -hsync +vsync
-#   xrandr --addmode XWAYLAND0 "2560x1440"
-#   xrandr --output XWAYLAND0 --mode "2560x1440"
