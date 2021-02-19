@@ -48,6 +48,16 @@ cd ~/Downloads
 yes | sudo apt-get install wget
 yes | sudo apt-get install curl
 
+# Useful for syncing with external drives.
+yes | sudo apt-get install rsync
+
+# Used for ssh with Dartmouth's server.
+yes | sudo apt-get install filezilla
+
+# Used for Dartmouth's VPN
+yes | sudo apt-get install openvpn
+yes | sudo apt-get install network-manager-openvpn
+
 # Install git for cloing repositories.
 yes | sudo apt-get install git
 yes | sudo apt-get update
