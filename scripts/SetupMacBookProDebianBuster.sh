@@ -5,11 +5,10 @@
 # Device:	Mid 2012 MacBook Pro 13"
 
 # Add yourself to the sudoers file:
-# su
-# sudo adduser ryan sudo
+#   su
 
 # Then alter /etc/sudoers adding the following line:
-#	%ryan	ALL=(ALL:ALL) ALL
+#   %ryan	ALL=(ALL:ALL) ALL
 
 # Run updates and upgrades.
 yes | sudo apt-get update
@@ -146,7 +145,7 @@ yes | sudo apt-get remove --purge mlterm
 
 # Run this in case anything broke.
 yes | sudo apt-get --fix-broken install
-yes | sudo apt-get autoremove
+yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
 
 # You may want to remove the .deb files in ~/Downloads.
@@ -164,7 +163,6 @@ git config --global credential.helper /usr/share/doc/git/contrib/credential/libs
 # Then use this:
 git config --global user.email ryan_maguire@student.uml.edu
 
-
 # Make a Projects directory and clone all my repos.
 mkdir ~/Projects
 cd ~/Projects
@@ -172,6 +170,19 @@ git clone https://github.com/ryanmaguire/Mathematics-and-Physics.git
 git clone https://github.com/ryanmaguire/libtmpl.git
 git clone https://github.com/ryanmaguire/LinuxSetupScripts.git
 git clone https://github.com/NASA-Planetary-Science/rss_ringoccs.git
+
+# Install GNU Data Language (GDL), a free/open-source IDL replacement.
+yes | sudo apt-get install gnudatalanguage
+
+# Install Sagemath for knot theory stuff.
+yes | sudo apt-get install sagemath
+
+# Install iPython3. iPython will use python 2.7 in Debian 10 Buster.
+yes | sudo apt-get install ipython3
+
+# And some more cleanup.
+yes | sudo apt-get --purge autoremove
+yes | sudo apt-get autoclean
 
 # MANUAL THINGS.
 # Set ctrl+up and ctrl+down to change workspace.
@@ -181,16 +192,23 @@ git clone https://github.com/NASA-Planetary-Science/rss_ringoccs.git
 # Install pCloud and sync.
 # Sign in to signal and sync.
 # Add email/Online Accounts. Microsoft and Google are normal.
+# UML and Dartmouth accounts can be set up via IMAP/SMTP.
 # Yahoo needs a special two-factor password. Go to:
-#    https://login.yahoo.com/account/security/app-passwords
-#    In GNOME Online Accounts, select:
-#	imag server: imap.mail.yahoo.com
-#	username: Email without @yahoo.com
-#	encryption: SSL
-#	smtp server: smtp.mail.yahoo.com
-#	username: Email without @yahoo.com
-#	encryption: SSL
-# Set up emails in Evolution and Thunderbird.
+#   https://login.yahoo.com/account/security/app-passwords
+#   In GNOME Online Accounts, select:
+#   imap server: imap.mail.yahoo.com
+#   username: Email without @yahoo.com
+#   encryption: SSL
+#   smtp server: smtp.mail.yahoo.com
+#   username: Email without @yahoo.com
+#   encryption: SSL
+# For iCLoud emai;
+#   imap server: imap.mail.me.com
+#   port: 993
+#   encryption: SSL
+#   username: email without @icloud.com
+#   password: Create an app-specific password.
+# Set up emails in Thunderbird.
 # Activate theme in Tweaks app.
 # Change desktop background to something cool.
 # Move frequently used apps to dock.
@@ -205,7 +223,7 @@ git clone https://github.com/NASA-Planetary-Science/rss_ringoccs.git
 
 # Remove the older files.
 # sudo apt-get remove linux-image-VERSION
-# yes | sudo apt-get autoremove
+# yes | sudo apt-get --purge autoremove
 
 # Finally, update GRUB.
 # sudo update-grub
