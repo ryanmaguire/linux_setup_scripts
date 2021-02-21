@@ -183,6 +183,13 @@ git clone https://github.com/NASA-Planetary-Science/rss_ringoccs.git
 # Add email/Online Accounts. Microsoft and Google are normal.
 # Yahoo needs a special two-factor password. Go to:
 #    https://login.yahoo.com/account/security/app-passwords
+#    In GNOME Online Accounts, select:
+#	imag server: imap.mail.yahoo.com
+#	username: Email without @yahoo.com
+#	encryption: SSL
+#	smtp server: smtp.mail.yahoo.com
+#	username: Email without @yahoo.com
+#	encryption: SSL
 # Set up emails in Evolution and Thunderbird.
 # Activate theme in Tweaks app.
 # Change desktop background to something cool.
