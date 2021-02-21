@@ -11,8 +11,6 @@
 # Then alter /etc/sudoers adding the following line:
 #	%ryan	ALL=(ALL:ALL) ALL
 
-# Then go to the app store thing and add the non-free repositories for the WiFi.
-
 # Run updates and upgrades.
 yes | sudo apt-get update
 yes | sudo apt-get upgrade
@@ -25,18 +23,15 @@ yes | sudo apt-get update
 # has to do with the wi-fi card.
 yes | sudo update-pciids
 
-# BCM43 Not needed anymore!!! Does not support 5Ghz and drops connections.
-#     Install wifi driver. Go to software app and add non-free repositories.
-#     sudo apt-get update
-#     yes | sudo apt-get install firmware-b43-installer
-
-# Use these drivers! They're great! Must add non-free support, unfortunately.
-# These work with bluetooth, however!
-yes | sudo apt-get update
-yes | sudo apt-get install linux-headers-$(uname -r)
-yes | sudo apt-get install broadcom-sta-common
-yes | sudo apt-get install broadcom-sta-source
-yes | sudo apt-get install broadcom-sta-dkms
+# Need non-free and contrib for WiFi and graphics drivers. This assumes you
+# used the main Debian installer, and not the non-free one that has these
+# repositories already listed.
+echo -e "\n# Needed for WiFi and graphics drivers." |\
+  sudo tee -a /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian/ buster contrib non-free" |\
+  sudo tee -a /etc/apt/sources.list
+echo "deb-src http://deb.debian.org/debian/ buster contrib non-free" |\
+  sudo tee -a /etc/apt/sources.list
 
 # To add calendars for Microsoft Exchange (UML and Dartmouth)
 # add evolution-ews. On Buster this is available on backports.
@@ -46,7 +41,22 @@ echo "deb http://ftp.debian.org/debian buster-backports main" |\
   sudo tee -a /etc/apt/sources.list
 echo "deb-src http://ftp.debian.org/debian buster-backports main" |\
   sudo tee -a /etc/apt/sources.list
+
+# Update the new sources.list.
 yes | sudo apt-get update
+
+# Install the WiFi drivers. You will need to restart for these to be active.
+yes | sudo apt-get update
+yes | sudo apt-get install linux-headers-$(uname -r)
+yes | sudo apt-get install broadcom-sta-common
+yes | sudo apt-get install broadcom-sta-source
+yes | sudo apt-get install broadcom-sta-dkms
+
+# Needed for the Intel graphics driver.
+yes | sudo apt-get install firmware-linux
+yes | sudo apt-get install firmware-linux-nonfree
+
+# Install the Microsoft Exchange extension for evolution.
 yes | sudo apt-get install -t buster-backports evolution-ews
 
 # Run the rest of the script in downloads.
@@ -77,7 +87,8 @@ echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" |\
   sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
 
 # 3. Update your package database and install signal
-yes | sudo apt update && sudo apt install signal-desktop
+yes | sudo apt update
+yes | sudo apt install signal-desktop
 
 # Install nordvpn.
 wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
@@ -106,12 +117,14 @@ sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | 
 # Install LaTeX.
 yes | sudo apt-get install texlive-full
 
-# Run this in case anything broke.
-yes | sudo apt-get --fix-broken install
-yes | sudo apt-get autoremove
-yes | sudo apt-get clean
+# Install VLC.
+yes | sudo apt-get install vlc
 
-# Remove several things that come pre-installed.
+# Install jami
+yes | sudo apt-get install jami
+
+# Remove several things that come pre-installed. These are mostly apps for
+# non-English users that I never use.
 yes | sudo apt-get remove --purge mozc-data
 yes | sudo apt-get remove --purge hdate-applet
 yes | sudo apt-get remove --purge anthy
@@ -129,37 +142,32 @@ yes | sudo apt-get remove --purge khmerconverter
 yes | sudo apt-get remove --purge mlterm
 yes | sudo apt-get remove --purge xiterm+thai
 yes | sudo apt-get remove --purge xterm
-
-# Remove dependencies that are no longer needed.
-yes | sudo apt-get autoremove
-
-# Optional, remove games from work computer.
-yes | sudo apt-get remove --purge aisleriot
-yes | sudo apt-get remove --purge gnome-mahjongg
-yes | sudo apt-get remove --purge mah-jongg
-yes | sudo apt-get remove --purge five-or-more
-yes | sudo apt-get remove --purge four-in-a-row
-yes | sudo apt-get remove --purge hitori
-yes | sudo apt-get remove --purge gnome-klotski
-yes | sudo apt-get remove --purge iagno
-yes | sudo apt-get remove --purge gnome-mines
 yes | sudo apt-get remove --purge mlterm
-yes | sudo apt-get remove --purge gnome-music
-yes | sudo apt-get remove --purge gnome-nibbles
-yes | sudo apt-get remove --purge quadrapassel
-yes | sudo apt-get remove --purge gnome-robots
-yes | sudo apt-get remove --purge gnome-sudoku
-yes | sudo apt-get remove --purge swell-foop
-yes | sudo apt-get remove --purge tali
-yes | sudo apt-get remove --purge gnome-taquin
-yes | sudo apt-get remove --purge gnome-tetravex
-yes | sudo apt-get remove --purge lightsoff
+
+# Run this in case anything broke.
+yes | sudo apt-get --fix-broken install
 yes | sudo apt-get autoremove
+yes | sudo apt-get autoclean
 
 # You may want to remove the .deb files in ~/Downloads.
 rm -f ~/Downloads/*.deb
 yes | sudo apt-get update
 cd ~
+
+# Set up git password in GNOME Keyring. You will need to create a personal
+# access token with GitHub for this.
+yes | sudo apt-get install libsecret-1-0
+yes | sudo apt-get install libsecret-1-dev
+sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
+git config --global credential.helper /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+
+# Make a Projects directory and clone all my repos.
+mkdir ~/Projects
+cd ~/Projects
+git clone https://github.com/ryanmaguire/Mathematics-and-Physics.git
+git clone https://github.com/ryanmaguire/libtmpl.git
+git clone https://github.com/ryanmaguire/LinuxSetupScripts.git
+git clone https://github.com/NASA-Planetary-Science/rss_ringoccs.git
 
 # MANUAL THINGS.
 # Set ctrl+up and ctrl+down to change workspace.
@@ -168,7 +176,6 @@ cd ~
 # Sign into nordvpn.
 # Install pCloud and sync.
 # Sign in to signal and sync.
-# Set up git password in keyring.
 # Add email/Online Accounts. Microsoft and Google are normal.
 # Yahoo needs a special two-factor password. Go to:
 #    https://login.yahoo.com/account/security/app-passwords
@@ -180,12 +187,6 @@ cd ~
 #    Dash-to-Dock
 #    Trasnparent OSD
 #    Enable user themes.
-
-# Optional.
-# Install VLC. Works great. Rhythmbox and GNOME videos are sufficient, however.
-
-# Install Jami. Pretty buggy, couldn't get to work.
-# Signal now has voice and video calls, so this is unnecessary.
 
 # Remove old kernel files we no longer need.
 # uname -r
