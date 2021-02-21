@@ -208,6 +208,11 @@ yes | sudo apt-get autoclean
 #   encryption: SSL
 #   username: email without @icloud.com
 #   password: Create an app-specific password.
+#   smtp server: smtp.mail.me.com
+#   encryption: SSL
+#   port: 587
+#   username: email with the @icloud.com included.
+#   password: Same app-specific password.
 # Set up emails in Thunderbird.
 # Activate theme in Tweaks app.
 # Change desktop background to something cool.
@@ -220,25 +225,21 @@ yes | sudo apt-get autoclean
 # Remove old kernel files we no longer need.
 # uname -r
 # dpkg --list 'linux-image*' | grep ^ii
-
 # Remove the older files.
-# sudo apt-get remove linux-image-VERSION
-# yes | sudo apt-get --purge autoremove
-
+#   sudo apt-get remove linux-image-VERSION
+#   yes | sudo apt-get --purge autoremove
 # Finally, update GRUB.
-# sudo update-grub
+#   sudo update-grub
 
 # OLD
 # Fix mac address problem. Go to /etc/NetworkManager/NetworkManager.conf
 # Add the lines:
-#       [device]
-#       wifi.scan-rand-mac-address=no
-
+#   [device]
+#   wifi.scan-rand-mac-address=no
 # Save and run:
-# sudo systemctl restart NetworkManager
-# /etc/init.d/network-manager restart
-
+#   sudo systemctl restart NetworkManager
+#   /etc/init.d/network-manager restart
 # Go to /etc/network/
-#       sudo nano interfaces
+#   sudo nano interfaces
 # Comment out the line:
-#       source /etc/network/interfaces.d/*
+#   source /etc/network/interfaces.d/*
