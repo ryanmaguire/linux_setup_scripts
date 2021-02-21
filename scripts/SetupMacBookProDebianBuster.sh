@@ -161,6 +161,10 @@ yes | sudo apt-get install libsecret-1-dev
 sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
 git config --global credential.helper /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
 
+# Then use this:
+git config --global user.email ryan_maguire@student.uml.edu
+
+
 # Make a Projects directory and clone all my repos.
 mkdir ~/Projects
 cd ~/Projects
