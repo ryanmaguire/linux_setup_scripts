@@ -183,6 +183,7 @@ yes | sudo apt-get install ipython3
 # And some more cleanup.
 yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
+yes | sudo apt-get update
 
 # MANUAL THINGS.
 # Set ctrl+up and ctrl+down to change workspace.
