@@ -51,6 +51,9 @@ yes | sudo apt-get install curl
 # Useful for syncing with external drives.
 yes | sudo apt-get install rsync
 
+# Used for plotting, GNU's plot-utils.
+yes | sudo apt-get install plotutils
+
 # Used for ssh with Dartmouth's server.
 yes | sudo apt-get install filezilla
 
@@ -58,7 +61,7 @@ yes | sudo apt-get install filezilla
 yes | sudo apt-get install openvpn
 yes | sudo apt-get install network-manager-openvpn
 
-# Install git for cloing repositories.
+# Install git for cloning repositories.
 yes | sudo apt-get install git
 yes | sudo apt-get update
 
@@ -124,11 +127,6 @@ sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | 
 # Install LaTeX.
 yes | sudo apt-get install texlive-full
 
-# Run this in case anything broke.
-yes | sudo apt-get --fix-broken install
-yes | sudo apt-get autoremove
-yes | sudo apt-get clean
-
 # Remove several things that come pre-installed.
 yes | sudo apt-get remove --purge mozc-data
 yes | sudo apt-get remove --purge hdate-applet
@@ -147,9 +145,6 @@ yes | sudo apt-get remove --purge khmerconverter
 yes | sudo apt-get remove --purge mlterm
 yes | sudo apt-get remove --purge xiterm+thai
 yes | sudo apt-get remove --purge xterm
-
-# Remove dependencies that are no longer needed.
-yes | sudo apt-get autoremove
 
 # Optional, remove games from work computer.
 yes | sudo apt-get remove --purge aisleriot
@@ -213,7 +208,20 @@ yes | sudo apt-get install firmware-iwlwifi
 # Needed to use UPnP with home server.
 yes | sudo apt-get install vlc
 yes | sudo apt-get update
+
+# Used for knot theory stuff with SnapPy.
+yes | sudo apt-get install sagemath
+yes | sudo apt-get install ipython3
+yes | sudo apt-get update
+
+pip install snappy
+pip install snappy_15_knots
+yes | sudo apt-get update
+
+# Run this in case anything broke.
+yes | sudo apt-get --fix-broken install
 yes | sudo apt-get upgrade
+yes | sudo apt-get full-upgrade
 yes | sudo apt-get autoremove
 yes | sudo apt-get autoclean
 
@@ -236,9 +244,6 @@ yes | sudo apt-get autoclean
 #    Dash-to-Dock
 #    Trasnparent OSD
 #    Enable user themes.
-
-# Install Jami. Pretty buggy, couldn't get to work.
-# Signal now has voice and video calls, so this is unnecessary.
 
 # Remove old kernel files we no longer need.
 # uname -r
