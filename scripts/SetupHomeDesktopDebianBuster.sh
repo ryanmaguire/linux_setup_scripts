@@ -54,9 +54,6 @@ yes | sudo apt-get install rsync
 # Used for plotting, GNU's plot-utils.
 yes | sudo apt-get install plotutils
 
-# Used for ssh with Dartmouth's server.
-yes | sudo apt-get install filezilla
-
 # Used for Dartmouth's VPN
 yes | sudo apt-get install openvpn
 yes | sudo apt-get install network-manager-openvpn
