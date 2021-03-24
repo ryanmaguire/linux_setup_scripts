@@ -6,7 +6,7 @@
 #   CPU:    AMD Ryzen 3900 12-core
 #   GPU:    Power Color rx 570
 #   RAM:    Ripjaw DDR4-3600 16GBx2
-#   MB: Gigabyte Aorus x570 Elite WiFi
+#   MB:     Gigabyte Aorus x570 Elite WiFi
 
 # Log into firefox, online accounts, etc.
 

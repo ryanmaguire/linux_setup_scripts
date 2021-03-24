@@ -1,12 +1,12 @@
 #!/bin/bash
 
 #	SETUP SCRIPT.
-# OS:		Debian 10 Buster.
-# Device:	Custom Desktop Computer
-#	CPU:	AMD Ryzen 3900 12-core
-#	GPU:	Power Color rx 570
-#	RAM:	Ripjaw DDR4-3600 16GBx2
-#	MB:	Gigabyte Aorus x570 Elite WiFi
+# OS:       Debian 10 Buster.
+# Device:   Custom Desktop Computer
+#	CPU:    AMD Ryzen 3900 12-core
+#	GPU:    Power Color rx 570
+#	RAM:    Ripjaw DDR4-3600 16GBx2
+#	MB:	    Gigabyte Aorus x570 Elite WiFi
 
 # Must add NON-FREE firmware for graphics card and WiFi antenna.
 
@@ -29,100 +29,8 @@ yes | sudo apt-get update
 yes | sudo apt-get dist-upgrade
 yes | sudo apt-get full-upgrade
 yes | sudo apt-get update
-
-# To add calendars for Microsoft Exchange (UML and Dartmouth)
-# add evolution-ews. On Buster this is available on backports.
-# Add to /etc/apt/sources.list:
-echo -e "\n# Needed for evolution-ews." | sudo tee -a /etc/apt/sources.list
-echo "deb http://ftp.debian.org/debian buster-backports main" |\
-  sudo tee -a /etc/apt/sources.list
-echo "deb-src http://ftp.debian.org/debian buster-backports main" |\
-  sudo tee -a /etc/apt/sources.list
-yes | sudo apt-get update
-yes | sudo apt-get install -t buster-backports evolution-ews
-
-# Run the rest of the script in downloads.
-cd ~/Downloads
-
-# Install curl and wget for downloading files.
-yes | sudo apt-get install wget
-yes | sudo apt-get install curl
-
-# Useful for syncing with external drives.
-yes | sudo apt-get install rsync
-
-# Used for plotting, GNU's plot-utils.
-yes | sudo apt-get install plotutils
-
-# Used for Dartmouth's VPN
-yes | sudo apt-get install openvpn
-yes | sudo apt-get install network-manager-openvpn
-
-# Install git for cloning repositories.
-yes | sudo apt-get install git
-yes | sudo apt-get update
-
-# Update pciids. I forget why I want this, but I think it
-# has to do with the wi-fi card.
-yes | sudo update-pciids
-
-# We need dkms to run the install script for the Apple Magic Pad drivers.
-yes | sudo apt-get install dkms
-
-# Grab the driver repository from GitHub.
-git clone https://github.com/rohitpid/Linux-Magic-Trackpad-2-Driver.git
-
-# Change directory into the repository we just cloned.
-cd Linux-Magic-Trackpad-2-Driver/scripts
-
-# Give execute permission to the install script and run it.
-chmod u+x install.sh
-sudo ./install.sh
-
-# Change directory back to downloads.
-cd ~/Downloads
-
-# Install GNOME Builder (or VS Code).
-yes | sudo apt-get install gnome-builder
-
-# Install signal. These are the comments from signal.
-
-# NOTE: These instructions only work for 64 bit Debian-based
-# Linux distributions such as Ubuntu, Mint etc.
-
-# 1. Install our official public software signing key
-wget -O- https://updates.signal.org/desktop/apt/keys.asc |\
-  sudo apt-key add -
-
-# 2. Add our repository to your list of repositories
-echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" |\
-  sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
-
-# 3. Update your package database and install signal
-yes | sudo apt update && sudo apt install signal-desktop
-
-# Install nordvpn.
-wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
-yes | sudo apt-get install ./nordvpn-release_1.0.0_all.deb
-yes | sudo apt-get update
-yes | sudo apt-get install nordvpn
-yes | sudo apt-get update
-
-# Install qbittorrent.
-yes | sudo apt-get update
-yes | sudo apt-get install qbittorrent
-
-# Install zoom.
-yes | sudo apt-get update
-wget https://zoom.us/client/latest/zoom_amd64.deb
-yes | sudo apt-get install ./zoom_amd64.deb
-yes | sudo apt-get update
-
-# Install Calibre (book library).
-sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
-
-# Install LaTeX.
-yes | sudo apt-get install texlive-full
+yes | sudo apt-get --purge autoremove
+yes | sudo apt-get autoclean
 
 # Remove several things that come pre-installed.
 yes | sudo apt-get remove --purge mozc-data
@@ -164,7 +72,96 @@ yes | sudo apt-get remove --purge tali
 yes | sudo apt-get remove --purge gnome-taquin
 yes | sudo apt-get remove --purge gnome-tetravex
 yes | sudo apt-get remove --purge lightsoff
-yes | sudo apt-get autoremove
+yes | sudo apt-get --purge autoremove
+yes | sudo apt-get autoclean
+
+# To add calendars for Microsoft Exchange (UML and Dartmouth)
+# add evolution-ews. On Buster this is available on backports.
+# Add to /etc/apt/sources.list:
+echo -e "\n# Needed for evolution-ews." | sudo tee -a /etc/apt/sources.list
+echo "deb http://ftp.debian.org/debian buster-backports main" |\
+  sudo tee -a /etc/apt/sources.list
+echo "deb-src http://ftp.debian.org/debian buster-backports main" |\
+  sudo tee -a /etc/apt/sources.list
+yes | sudo apt-get update
+yes | sudo apt-get install -t buster-backports evolution-ews
+
+# Run the rest of the script in downloads.
+cd ~/Downloads
+
+# Install curl and wget for downloading files.
+yes | sudo apt-get install wget
+yes | sudo apt-get install curl
+
+# Useful for syncing with external drives.
+yes | sudo apt-get install rsync
+
+# Used for plotting, GNU's plot-utils.
+yes | sudo apt-get install plotutils
+
+# Used for Dartmouth's VPN
+yes | sudo apt-get install openvpn
+yes | sudo apt-get install network-manager-openvpn
+
+# Install git for cloning repositories.
+yes | sudo apt-get install git
+yes | sudo apt-get update
+
+# Update pciids. I forget why I want this, but I think it
+# has to do with the wi-fi card.
+yes | sudo update-pciids
+
+# Install GNOME Builder (or VS Code).
+yes | sudo apt-get install gnome-builder
+
+# Install signal. These are the comments from signal.
+
+# NOTE: These instructions only work for 64 bit Debian-based
+# Linux distributions such as Ubuntu, Mint etc.
+
+# 1. Install our official public software signing key
+wget -O- https://updates.signal.org/desktop/apt/keys.asc |\
+  sudo apt-key add -
+
+# 2. Add our repository to your list of repositories
+echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" |\
+  sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
+
+# 3. Update your package database and install signal
+yes | sudo apt update
+yes | sudo apt install signal-desktop
+
+# Install nordvpn.
+wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
+yes | sudo apt-get install ./nordvpn-release_1.0.0_all.deb
+yes | sudo apt-get update
+yes | sudo apt-get install nordvpn
+yes | sudo apt-get update
+
+# For VSCode. GNOME Buiilder is good for most purposes, but VSCode has a
+# LaTeX extension that is very useful.
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/microsoft-archive-keyring.gpg
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+yes | sudo apt-get install apt-transport-https
+yes | sudo apt-get update
+yes | sudo apt-get install code
+
+# Install qbittorrent.
+yes | sudo apt-get update
+yes | sudo apt-get install qbittorrent
+
+# Install zoom.
+yes | sudo apt-get update
+wget https://zoom.us/client/latest/zoom_amd64.deb
+yes | sudo apt-get install ./zoom_amd64.deb
+yes | sudo apt-get update
+
+# Install Calibre (book library).
+sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+
+# Install LaTeX.
+yes | sudo apt-get install texlive-full
 
 # You may want to remove the .deb files in ~/Downloads.
 rm -f ~/Downloads/*.deb
@@ -215,16 +212,81 @@ pip install snappy
 pip install snappy_15_knots
 yes | sudo apt-get update
 
+# Set up git password in GNOME Keyring. You will need to create a personal
+# access token with GitHub for this.
+yes | sudo apt-get install libsecret-1-0
+yes | sudo apt-get install libsecret-1-dev
+sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
+git config --global credential.helper /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+
+# Then use this:
+git config --global user.email ryan_maguire@student.uml.edu
+
+# Make a Projects directory and clone all my repos.
+mkdir ~/Projects
+cd ~/Projects
+git clone https://github.com/ryanmaguire/Mathematics-and-Physics.git
+git clone https://github.com/ryanmaguire/libtmpl.git
+git clone https://github.com/ryanmaguire/LinuxSetupScripts.git
+git clone https://github.com/NASA-Planetary-Science/rss_ringoccs.git
+
+# Install GNU Data Language (GDL), a free/open-source IDL replacement.
+yes | sudo apt-get install gnudatalanguage
+
+# Install iPython3. iPython will use python 2.7 in Debian 10 Buster.
+yes | sudo apt-get install ipython3
+
+# Needed to use Saffire pro 40. The PulseAudio drivers work, but have
+# occasional xruns. The Jack Audio server, when using the FFADO drivers, works
+# perfect. A few steps are needed to get it running.
+
+# The following comments are from KX studio.
+
+# Install required dependencies if needed
+yes | sudo apt-get install apt-transport-https gpgv
+
+# Remove legacy repos
+sudo dpkg --purge kxstudio-repos-gcc5
+
+# Download package file
+wget https://launchpad.net/~kxstudio-debian/+archive/kxstudio/+files/kxstudio-repos_10.0.3_all.deb
+
+# Install it
+yes | sudo dpkg -i kxstudio-repos_10.0.3_all.deb
+rm -f kxstudio-repos_10.0.3_all.deb
+
+# Now install jack and all the necessary FFADO stuff.
+yes | sudo apt-get update
+yes | sudo apt-get upgrade
+yes | sudo apt-get install jackd2
+yes | sudo apt-get install jackd2-firewire
+yes | sudo apt-get install ffado-dbus-server
+yes | sudo apt-get install ffado-mixer-qt4
+yes | sudo apt-get install multimedia-firewire
+yes | sudo apt-get install cadence
+yes | sudo apt-get install ffado-tools
+yes | sudo apt-get install libffado2
+
+# You then need to blacklist snd_dice. Add the following file:
+sudo touch /etc/modprobe.d/alsa-nope.conf
+echo "blacklist snd_dice" | sudo tee -a /etc/modprobe.d/alsa-nope.conf
+
+# You'll need to reboot for all of this to go into effect.
+
+# Used for virtual machines.
+yes | sudo apt-get install gnome-boxes
+
+yes | sudo apt-get install neofetch
+yes | sudo apt-get install libcairo2-dev
+yes | sudo apt-get install gthumb
+
 # Run this in case anything broke.
 yes | sudo apt-get --fix-broken install
-yes | sudo apt-get upgrade
 yes | sudo apt-get full-upgrade
-yes | sudo apt-get autoremove
+yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
 
 # MANUAL THINGS.
-# Set ctrl+up and ctrl+down to change workspace.
-# Go to mouse/touchpad settings and enable tap-to-click.
 # Sign into Firefox sync.
 # Sign into nordvpn.
 # Install pCloud and sync.
@@ -232,7 +294,25 @@ yes | sudo apt-get autoclean
 # Set up git password in keyring.
 # Add email/Online Accounts. Microsoft and Google are normal.
 # Yahoo needs a special two-factor password. Go to:
-#    https://login.yahoo.com/account/security/app-passwords
+#   https://login.yahoo.com/account/security/app-passwords
+#   In GNOME Online Accounts, select:
+#   imap server: imap.mail.yahoo.com
+#   username: Email without @yahoo.com
+#   encryption: SSL
+#   smtp server: smtp.mail.yahoo.com
+#   username: Email without @yahoo.com
+#   encryption: SSL
+# For iCLoud email;
+#   imap server: imap.mail.me.com
+#   port: 993
+#   encryption: SSL
+#   username: email without @icloud.com
+#   password: Create an app-specific password.
+#   smtp server: smtp.mail.me.com
+#   encryption: SSL
+#   port: 587
+#   username: email with the @icloud.com included.
+#   password: Same app-specific password.
 # Set up emails in Evolution and Thunderbird.
 # Activate theme in Tweaks app.
 # Change desktop background to something cool.
@@ -252,6 +332,3 @@ yes | sudo apt-get autoclean
 
 # Finally, update GRUB.
 # sudo update-grub
-
-# After removing the old kernel files, you may need to reinstall
-# the touch pad drivers. These should still be in Downloads.
