@@ -70,7 +70,6 @@ echo "deb-src http://ftp.debian.org/debian buster-backports main" |\
 yes | sudo apt-get update
 
 # Install the WiFi drivers. You will need to restart for these to be active.
-yes | sudo apt-get update
 yes | sudo apt-get install linux-headers-$(uname -r)
 yes | sudo apt-get install broadcom-sta-common
 yes | sudo apt-get install broadcom-sta-source
@@ -185,30 +184,6 @@ yes | sudo apt-get install ipython3
 yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
 yes | sudo apt-get update
-
-# MANUAL THINGS.
-# Set ctrl+up and ctrl+down to change workspace.
-# Go to mouse/touchpad settings and enable tap-to-click.
-# Sign into Firefox sync.
-# Sign into nordvpn.
-# Install pCloud and sync.
-# Sign in to signal and sync.
-# Activate theme in Tweaks app.
-# Change desktop background to something cool.
-# Move frequently used apps to dock.
-# Go to GNOME and set up icon bar and user preferences:
-#    Dash-to-Dock
-#    Trasnparent OSD
-#    Enable user themes.
-
-# Remove old kernel files we no longer need.
-# uname -r
-# dpkg --list 'linux-image*' | grep ^ii
-# Remove the older files.
-#   sudo apt-get remove linux-image-VERSION
-#   yes | sudo apt-get --purge autoremove
-# Finally, update GRUB.
-#   sudo update-grub
 
 # OLD
 # Fix mac address problem. Go to /etc/NetworkManager/NetworkManager.conf

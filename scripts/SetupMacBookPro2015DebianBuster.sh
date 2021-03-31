@@ -43,7 +43,7 @@ yes | sudo apt-get remove --purge xiterm+thai
 yes | sudo apt-get remove --purge xterm
 yes | sudo apt-get remove --purge mlterm
 
-# Update pciids. Recommended on the Debian wiki for MacBook pro WiFi.
+# Update pciids. Recommended on the Debian wiki for MacBook Pro WiFi.
 yes | sudo update-pciids
 
 # Need non-free and contrib for WiFi and graphics drivers. This assumes you
@@ -69,7 +69,6 @@ echo "deb-src http://ftp.debian.org/debian buster-backports main" |\
 yes | sudo apt-get update
 
 # Install the WiFi drivers. You will need to restart for these to be active.
-yes | sudo apt-get update
 yes | sudo apt-get install linux-headers-$(uname -r)
 yes | sudo apt-get install broadcom-sta-common
 yes | sudo apt-get install broadcom-sta-source
@@ -89,7 +88,7 @@ cd ~/Downloads
 yes | sudo apt-get install wget
 yes | sudo apt-get install curl
 
-# Install git for cloing repositories.
+# Install git for cloning repositories.
 yes | sudo apt-get install git
 yes | sudo apt-get update
 
@@ -118,12 +117,6 @@ wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0
 yes | sudo apt-get install ./nordvpn-release_1.0.0_all.deb
 yes | sudo apt-get update
 yes | sudo apt-get install nordvpn
-yes | sudo apt-get update
-
-# Install zoom.
-yes | sudo apt-get update
-wget https://zoom.us/client/latest/zoom_amd64.deb
-yes | sudo apt-get install ./zoom_amd64.deb
 yes | sudo apt-get update
 
 # Install Calibre (book library).
@@ -176,23 +169,3 @@ yes | sudo apt-get install ipython3
 yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
 yes | sudo apt-get update
-
-# MANUAL THINGS.
-# Set ctrl+up and ctrl+down to change workspace.
-# Go to mouse/touchpad settings and enable tap-to-click.
-# Sign into Firefox sync.
-# Sign into nordvpn.
-# Install pCloud and sync.
-# Sign in to signal and sync.
-# Change desktop background to something cool.
-# Move frequently used apps to dock.
-# Go to GNOME and set up icon bar and user preferences:
-#    Dash-to-Dock
-#    Trasnparent OSD
-
-# Remove old kernel files we no longer need.
-# uname -r
-# dpkg --list 'linux-image*' | grep ^ii
-# Remove the older files.
-#   sudo apt-get remove linux-image-VERSION
-#   yes | sudo apt-get --purge autoremove
