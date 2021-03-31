@@ -1,0 +1,13 @@
+Remove old kernel files we no longer need.
+	uname -r
+	dpkg --list 'linux-image*' | grep ^ii
+
+Remove the older files.
+	sudo apt-get remove linux-image-VERSION
+	yes | sudo apt-get autoremove
+
+Finally, update GRUB.
+	sudo update-grub
+
+After removing the old kernel files, you may need to reinstall
+the touch pad drivers. These should still be in Downloads.

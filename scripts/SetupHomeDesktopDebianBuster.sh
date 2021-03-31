@@ -25,12 +25,16 @@
 # Run updates and upgrades.
 yes | sudo apt-get update
 yes | sudo apt-get upgrade
-yes | sudo apt-get update
 yes | sudo apt-get dist-upgrade
 yes | sudo apt-get full-upgrade
 yes | sudo apt-get update
 yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
+
+if [ $1 == "--reboot" ]; then
+    yes | sudo update-grub
+    sudo reboot
+fi
 
 # Remove several things that come pre-installed.
 yes | sudo apt-get remove --purge mozc-data
@@ -84,6 +88,8 @@ echo "deb http://ftp.debian.org/debian buster-backports main" |\
 echo "deb-src http://ftp.debian.org/debian buster-backports main" |\
   sudo tee -a /etc/apt/sources.list
 yes | sudo apt-get update
+
+# Install the Microsoft Exchange extension for evolution.
 yes | sudo apt-get install -t buster-backports evolution-ews
 
 # Run the rest of the script in downloads.
@@ -167,21 +173,6 @@ yes | sudo apt-get install texlive-full
 rm -f ~/Downloads/*.deb
 yes | sudo apt-get update
 cd ~
-
-# The following errors occured:
-# W: Possible missing firmware /lib/firmware/amdgpu/vega20_asd.bin for module amdgpu
-# W: Possible missing firmware /lib/firmware/amdgpu/vega20_sos.bin for module amdgpu
-# W: Possible missing firmware /lib/firmware/amdgpu/vega20_rlc.bin for module amdgpu
-# W: Possible missing firmware /lib/firmware/amdgpu/vega20_mec2.bin for module amdgpu
-# W: Possible missing firmware /lib/firmware/amdgpu/vega20_mec.bin for module amdgpu
-# W: Possible missing firmware /lib/firmware/amdgpu/vega20_me.bin for module amdgpu
-# W: Possible missing firmware /lib/firmware/amdgpu/vega20_pfp.bin for module amdgpu
-# W: Possible missing firmware /lib/firmware/amdgpu/vega20_ce.bin for module amdgpu
-# W: Possible missing firmware /lib/firmware/amdgpu/vega20_sdma1.bin for module amdgpu
-# W: Possible missing firmware /lib/firmware/amdgpu/vega20_sdma.bin for module amdgpu
-# W: Possible missing firmware /lib/firmware/amdgpu/vega20_uvd.bin for module amdgpu
-# W: Possible missing firmware /lib/firmware/amdgpu/vega20_vce.bin for module amdgpu
-# W: Possible missing firmware /lib/firmware/amdgpu/vega20_smc.bin for module amdgpu
 
 # Needed to run the following from https://wiki.debian.org/AtiHowTo
 echo -e "\n# Needed for amdgpu." | sudo tee -a /etc/apt/sources.list
@@ -286,49 +277,4 @@ yes | sudo apt-get full-upgrade
 yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
 
-# MANUAL THINGS.
-# Sign into Firefox sync.
-# Sign into nordvpn.
-# Install pCloud and sync.
-# Sign in to signal and sync.
-# Set up git password in keyring.
-# Add email/Online Accounts. Microsoft and Google are normal.
-# Yahoo needs a special two-factor password. Go to:
-#   https://login.yahoo.com/account/security/app-passwords
-#   In GNOME Online Accounts, select:
-#   imap server: imap.mail.yahoo.com
-#   username: Email without @yahoo.com
-#   encryption: SSL
-#   smtp server: smtp.mail.yahoo.com
-#   username: Email without @yahoo.com
-#   encryption: SSL
-# For iCLoud email;
-#   imap server: imap.mail.me.com
-#   port: 993
-#   encryption: SSL
-#   username: email without @icloud.com
-#   password: Create an app-specific password.
-#   smtp server: smtp.mail.me.com
-#   encryption: SSL
-#   port: 587
-#   username: email with the @icloud.com included.
-#   password: Same app-specific password.
-# Set up emails in Evolution and Thunderbird.
-# Activate theme in Tweaks app.
-# Change desktop background to something cool.
-# Move frequently used apps to dock.
-# Go to GNOME and set up icon bar and user preferences:
-#    Dash-to-Dock
-#    Trasnparent OSD
-#    Enable user themes.
-
-# Remove old kernel files we no longer need.
-# uname -r
-# dpkg --list 'linux-image*' | grep ^ii
-
-# Remove the older files.
-# sudo apt-get remove linux-image-VERSION
-# yes | sudo apt-get autoremove
-
-# Finally, update GRUB.
-# sudo update-grub
+sudo reboot

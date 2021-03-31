@@ -7,13 +7,12 @@
 # Update everything.
 cd ~/Downloads
 yes | sudo apt-get update
-yes | sudo apt-get full-upgrade
-yes | sudo apt-get update
 yes | sudo apt-get upgrade
 yes | sudo apt-get dist-upgrade
 yes | sudo apt-get full-upgrade
 yes | sudo apt-get update
-yes | sudo apt-get autoremove
+yes | sudo apt-get --purge autoremove
+yes | sudo apt-get autoclean
 
 # Install all of the necessary stuff (gcc, make, etc.)
 yes | sudo apt-get install build-essential
@@ -40,7 +39,8 @@ echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" |\
   sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
 
 # 3. Update your package database and install signal
-yes | sudo apt update && sudo apt install signal-desktop
+yes | sudo apt update
+yes | sudo apt install signal-desktop
 
 # Install Caprine Facebook messenger for Molly.
 wget https://github.com/sindresorhus/caprine/releases/download/v2.52.0/caprine_2.52.0_amd64.deb
@@ -68,5 +68,5 @@ yes | sudo apt-get install --yes elementary-tweaks
 
 # Run this in case anything broke.
 yes | sudo apt-get --fix-broken install
-yes | sudo apt-get autoremove
+yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean

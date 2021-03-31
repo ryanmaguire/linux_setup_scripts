@@ -1,0 +1,22 @@
+Add email/Online Accounts. Microsoft and Google are normal.
+UML and Dartmouth accounts can be set up via IMAP/SMTP.
+Yahoo needs a special two-factor password. Go to:
+  https://login.yahoo.com/account/security/app-passwords
+  In GNOME Online Accounts, select:
+  imap server: imap.mail.yahoo.com
+  username: Email without @yahoo.com
+  encryption: SSL
+  smtp server: smtp.mail.yahoo.com
+  username: Email without @yahoo.com
+  encryption: SSL
+For iCLoud emai;
+  imap server: imap.mail.me.com
+  port: 993
+  encryption: SSL
+  username: email without @icloud.com
+  password: Create an app-specific password.
+  smtp server: smtp.mail.me.com
+  encryption: SSL
+  port: 587
+  username: email with the @icloud.com included.
+  password: Same app-specific password.

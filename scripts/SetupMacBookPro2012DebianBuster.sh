@@ -13,10 +13,35 @@
 # Run updates and upgrades.
 yes | sudo apt-get update
 yes | sudo apt-get upgrade
-yes | sudo apt-get update
 yes | sudo apt-get dist-upgrade
 yes | sudo apt-get full-upgrade
 yes | sudo apt-get update
+
+if [ $1 == "--reboot" ]; then
+    yes | sudo update-grub
+    sudo reboot
+fi
+
+# Remove several things that come pre-installed. These are mostly apps for
+# non-English users that I never use.
+yes | sudo apt-get remove --purge mozc-data
+yes | sudo apt-get remove --purge hdate-applet
+yes | sudo apt-get remove --purge anthy
+yes | sudo apt-get remove --purge anthy-common
+yes | sudo apt-get remove --purge debian-reference
+yes | sudo apt-get remove --purge debian-reference-common
+yes | sudo apt-get remove --purge fcitx
+yes | sudo apt-get remove --purge fcitx-anthy
+yes | sudo apt-get remove --purge fcitx-config-common
+yes | sudo apt-get remove --purge fcitx5
+yes | sudo apt-get remove --purge fcitx-data
+yes | sudo apt-get remove --purge fcitx5-data
+yes | sudo apt-get remove --purge goldendict
+yes | sudo apt-get remove --purge khmerconverter
+yes | sudo apt-get remove --purge mlterm
+yes | sudo apt-get remove --purge xiterm+thai
+yes | sudo apt-get remove --purge xterm
+yes | sudo apt-get remove --purge mlterm
 
 # Update pciids. I forget why I want this, but I think it
 # has to do with the wi-fi card.
@@ -119,30 +144,6 @@ yes | sudo apt-get install texlive-full
 # Install VLC.
 yes | sudo apt-get install vlc
 
-# Install jami
-yes | sudo apt-get install jami
-
-# Remove several things that come pre-installed. These are mostly apps for
-# non-English users that I never use.
-yes | sudo apt-get remove --purge mozc-data
-yes | sudo apt-get remove --purge hdate-applet
-yes | sudo apt-get remove --purge anthy
-yes | sudo apt-get remove --purge anthy-common
-yes | sudo apt-get remove --purge debian-reference
-yes | sudo apt-get remove --purge debian-reference-common
-yes | sudo apt-get remove --purge fcitx
-yes | sudo apt-get remove --purge fcitx-anthy
-yes | sudo apt-get remove --purge fcitx-config-common
-yes | sudo apt-get remove --purge fcitx5
-yes | sudo apt-get remove --purge fcitx-data
-yes | sudo apt-get remove --purge fcitx5-data
-yes | sudo apt-get remove --purge goldendict
-yes | sudo apt-get remove --purge khmerconverter
-yes | sudo apt-get remove --purge mlterm
-yes | sudo apt-get remove --purge xiterm+thai
-yes | sudo apt-get remove --purge xterm
-yes | sudo apt-get remove --purge mlterm
-
 # Run this in case anything broke.
 yes | sudo apt-get --fix-broken install
 yes | sudo apt-get --purge autoremove
@@ -192,29 +193,6 @@ yes | sudo apt-get update
 # Sign into nordvpn.
 # Install pCloud and sync.
 # Sign in to signal and sync.
-# Add email/Online Accounts. Microsoft and Google are normal.
-# UML and Dartmouth accounts can be set up via IMAP/SMTP.
-# Yahoo needs a special two-factor password. Go to:
-#   https://login.yahoo.com/account/security/app-passwords
-#   In GNOME Online Accounts, select:
-#   imap server: imap.mail.yahoo.com
-#   username: Email without @yahoo.com
-#   encryption: SSL
-#   smtp server: smtp.mail.yahoo.com
-#   username: Email without @yahoo.com
-#   encryption: SSL
-# For iCLoud emai;
-#   imap server: imap.mail.me.com
-#   port: 993
-#   encryption: SSL
-#   username: email without @icloud.com
-#   password: Create an app-specific password.
-#   smtp server: smtp.mail.me.com
-#   encryption: SSL
-#   port: 587
-#   username: email with the @icloud.com included.
-#   password: Same app-specific password.
-# Set up emails in Thunderbird.
 # Activate theme in Tweaks app.
 # Change desktop background to something cool.
 # Move frequently used apps to dock.

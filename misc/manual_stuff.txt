@@ -1,0 +1,13 @@
+MANUAL THINGS.
+Sign into Firefox sync.
+Sign into nordvpn.
+Install pCloud and sync.
+Sign in to signal and sync.
+Set up git password in keyring.
+Activate theme in Tweaks app.
+Change desktop background to something cool.
+Move frequently used apps to dock.
+Go to GNOME and set up icon bar and user preferences:
+   Dash-to-Dock
+   Trasnparent OSD
+   User themes.
