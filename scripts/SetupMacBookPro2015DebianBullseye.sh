@@ -69,42 +69,15 @@ yes | sudo apt-get install broadcom-sta-source
 yes | sudo apt-get install broadcom-sta-dkms
 yes | sudo apt-get install firmware-linux
 yes | sudo apt-get install firmware-linux-nonfree
-yes | sudo apt-get install wget
-yes | sudo apt-get install curl
 yes | sudo apt-get install git
 yes | sudo apt-get install gnome-builder
 yes | sudo apt-get install calibre
-yes | sudo apt-get install texlive-full
 yes | sudo apt-get install vlc
+yes | sudo apt-get install jami
 yes | sudo apt-get install gnudatalanguage
-yes | sudo apt-get install sagematha
+yes | sudo apt-get install sagemath
 yes | sudo apt-get install ipython3
 yes | sudo apt-get update
-
-# Install signal.
-cd ~/Downloads
-wget -O- https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
-echo "deb [arch=amd64] https://updates.signal.org/desktop/apt"\
-     "xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
-yes | sudo apt update
-yes | sudo apt install signal-desktop
-
-# Install nordvpn.
-wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
-yes | sudo apt-get install ./nordvpn-release_1.0.0_all.deb
-yes | sudo apt-get update
-yes | sudo apt-get install nordvpn
-yes | sudo apt-get update
-
-# Run this in case anything broke.
-yes | sudo apt-get --fix-broken install
-yes | sudo apt-get --purge autoremove
-yes | sudo apt-get autoclean
-
-# You may want to remove the .deb files in ~/Downloads.
-rm -f ~/Downloads/*.deb
-yes | sudo apt-get update
-cd ~
 
 # Set up git password in GNOME Keyring. You will need to create a personal
 # access token with GitHub for this.
@@ -115,19 +88,25 @@ git config --global credential.helper \
 	/usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
 git config --global user.email ryan_maguire@student.uml.edu
 
-# Make a Projects directory and clone all my repos.
-mkdir ~/Projects
-cd ~/Projects
+cd ~/Documents
 git clone https://github.com/ryanmaguire/Mathematics-and-Physics.git
 git clone https://github.com/ryanmaguire/libtmpl.git
 git clone https://github.com/ryanmaguire/LinuxSetupScripts.git
 git clone https://github.com/NASA-Planetary-Science/rss_ringoccs.git
 
 # And some more cleanup.
+yes | sudo apt-get --fix-broken install
 yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
 yes | sudo apt-get update
 
-# edit /etc/default/grub and add:
-#    GRUB_CMDLINE_LINUX_DEFAULT=”quiet libata.force=noncq”
+# Probably not needed anymore.
+#	edit /etc/default/grub and add:
+#		GRUB_CMDLINE_LINUX_DEFAULT=”quiet libata.force=noncq”
+
+# Still needed:
+#    sudo -s
+#    crontab -e
+# Add the line:
+#    @reboot echo disable > /sys/firmware/acpi/interrupts/gpe06
 
