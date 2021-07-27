@@ -3,6 +3,7 @@ Sign into Firefox sync.
 Sign into nordvpn.
 Install pCloud and sync.
 Sign in to signal and sync.
+Sign in to Jami.
 Set up git password in keyring.
 Activate theme in Tweaks app.
 Change desktop background to something cool.
