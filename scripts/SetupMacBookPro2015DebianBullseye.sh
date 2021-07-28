@@ -10,17 +10,28 @@
 # Then alter /etc/sudoers adding the following line:
 #   %ryan	ALL=(ALL:ALL) ALL
 
-# Run updates and upgrades.
-yes | sudo apt-get update
-yes | sudo apt-get upgrade
-yes | sudo apt-get dist-upgrade
-yes | sudo apt-get full-upgrade
-yes | sudo apt-get update
+# MANUAL
+# yes | sudo apt-get update
+# yes | sudo apt-get upgrade
+# yes | sudo apt-get dist-upgrade
+# yes | sudo apt-get full-upgrade
+# yes | sudo apt-get update
+# yes | sudo apt-get --purge autoremove
+# yes | sudo apt-get autoclean
+# yes | sudo update-grub
+# sudo reboot
 
-if [ $1 == "--reboot" ]; then
-    yes | sudo update-grub
-    sudo reboot
-fi
+# Then remove the old Linux kernel.
+# uname -r
+# dpkg --list "*linux-image*" | grep ii
+# yes | sudo apt-get --purge remove linux-image-VERSION
+# yes | sudo apt-get update
+# yes | sudo apt-get full-upgrade
+# yes | sudo apt-get --purge autoremove
+# yes | sudo apt-get autoclean
+# sudo update-grub
+
+# Then reboot and run this file.
 
 # Remove several things that come pre-installed. These are mostly apps for
 # non-English users that I never use.
@@ -69,14 +80,18 @@ yes | sudo apt-get install broadcom-sta-source
 yes | sudo apt-get install broadcom-sta-dkms
 yes | sudo apt-get install firmware-linux
 yes | sudo apt-get install firmware-linux-nonfree
+
+# Usefull apps.
 yes | sudo apt-get install git
 yes | sudo apt-get install gnome-builder
 yes | sudo apt-get install calibre
 yes | sudo apt-get install vlc
-yes | sudo apt-get install jami
 yes | sudo apt-get install gnudatalanguage
 yes | sudo apt-get install sagemath
 yes | sudo apt-get install ipython3
+yes | sudo apt-get install texlive-full
+yes | sudo apt-get install jami
+yes | sudo apt-get install gthumb
 yes | sudo apt-get update
 
 # Set up git password in GNOME Keyring. You will need to create a personal
