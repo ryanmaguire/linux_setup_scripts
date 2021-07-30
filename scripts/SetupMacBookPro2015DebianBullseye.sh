@@ -77,7 +77,24 @@ yes | sudo apt-get install jami
 yes | sudo apt-get install gnudatalanguage
 yes | sudo apt-get install sagemath
 yes | sudo apt-get install ipython3
+yes | sudo apt-get install wget
 yes | sudo apt-get update
+
+# Install signal. These are the comments from signal.
+
+# NOTE: These instructions only work for 64 bit Debian-based
+# Linux distributions such as Ubuntu, Mint etc.
+
+# 1. Install our official public software signing key
+wget -O- https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
+
+# 2. Add our repository to your list of repositories
+echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" |\
+  sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
+
+# 3. Update your package database and install signal
+yes | sudo apt update
+yes | sudo apt install signal-desktop
 
 # Set up git password in GNOME Keyring. You will need to create a personal
 # access token with GitHub for this.

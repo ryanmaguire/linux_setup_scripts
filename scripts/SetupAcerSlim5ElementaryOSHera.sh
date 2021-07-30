@@ -21,7 +21,7 @@ yes | sudo apt-get install build-essential
 yes | sudo apt-get install wget
 yes | sudo apt-get install curl
 
-# Install git for cloing repositories.
+# Install git for cloning repositories.
 yes | sudo apt-get install git
 yes | sudo apt-get update
 
@@ -31,8 +31,7 @@ yes | sudo apt-get update
 # Linux distributions such as Ubuntu, Mint etc.
 
 # 1. Install our official public software signing key
-wget -O- https://updates.signal.org/desktop/apt/keys.asc |\
-  sudo apt-key add -
+wget -O- https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
 
 # 2. Add our repository to your list of repositories
 echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" |\
@@ -43,8 +42,8 @@ yes | sudo apt update
 yes | sudo apt install signal-desktop
 
 # Install Caprine Facebook messenger for Molly.
-wget https://github.com/sindresorhus/caprine/releases/download/v2.52.0/caprine_2.52.0_amd64.deb
-yes | sudo apt-get install ./caprine_2.52.0_amd64.deb
+wget https://github.com/sindresorhus/caprine/releases/download/v2.54.0/caprine_2.54.0_amd64.deb
+yes | sudo apt-get install ./caprine_2.54.0_amd64.deb
 yes | sudo apt-get update
 
 # Install nordvpn.
