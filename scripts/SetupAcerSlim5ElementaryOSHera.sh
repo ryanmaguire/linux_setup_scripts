@@ -14,14 +14,10 @@ yes | sudo apt-get update
 yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
 
-# Install all of the necessary stuff (gcc, make, etc.)
+# Install useful stuff.
 yes | sudo apt-get install build-essential
-
-# Install curl and wget for downloading files.
 yes | sudo apt-get install wget
 yes | sudo apt-get install curl
-
-# Install git for cloning repositories.
 yes | sudo apt-get install git
 yes | sudo apt-get update
 
@@ -44,20 +40,17 @@ yes | sudo apt install signal-desktop
 # Install Caprine Facebook messenger for Molly.
 wget https://github.com/sindresorhus/caprine/releases/download/v2.54.0/caprine_2.54.0_amd64.deb
 yes | sudo apt-get install ./caprine_2.54.0_amd64.deb
-yes | sudo apt-get update
 
 # Install nordvpn.
 wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
+yes | sudo apt-get update
 yes | sudo apt-get install ./nordvpn-release_1.0.0_all.deb
-yes | sudo apt-get update
 yes | sudo apt-get install nordvpn
-yes | sudo apt-get update
 
 # Install zoom.
-yes | sudo apt-get update
 wget https://zoom.us/client/latest/zoom_amd64.deb
-yes | sudo apt-get install ./zoom_amd64.deb
 yes | sudo apt-get update
+yes | sudo apt-get install ./zoom_amd64.deb
 
 # Install tweaks
 yes | sudo apt-get update
