@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#	SETUP SCRIPT.
-# OS:		ElementaryOS 5: Hera.
-# Device:	Mid 2019 Acer Aspire Slim 5 15.6"
+# SETUP SCRIPT.
+# OS:     ElementaryOS 5: Hera.
+# Device: Mid 2019 Acer Aspire Slim 5 15.6"
 
 # Update everything.
 cd ~/Downloads
