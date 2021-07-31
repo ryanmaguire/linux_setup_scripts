@@ -1,45 +1,47 @@
 #!/bin/bash
 
-#   SETUP SCRIPT.
-# OS:       Ubuntu (GNOME Version) 20.04
-# Device:   Custom Desktop Computer
+# SETUP SCRIPT.
+# OS:     Ubuntu (GNOME Version) 20.04
+# Device: Custom Desktop Computer
 #   CPU:    AMD Ryzen 3900 12-core
 #   GPU:    Power Color rx 570
 #   RAM:    Ripjaw DDR4-3600 16GBx2
 #   MB:     Gigabyte Aorus x570 Elite WiFi
 
-# Log into firefox, online accounts, etc.
+# Give sudo permission to user.
+# Go to /etc/sudoers. You'll need root permissions so:
+#    su
+#    nano /etc/sudoers
+# Add the line:
+#    %ryan    ALL=(ALL:ALL) ALL
+# Save the changes and then run:
+#    apt-get update
+#    exit
+# You're no longer running as root, but should have sudo permission.
+# Check this with sudo apt-get update
 
-yes | sudo apt-get update
-yes | sudo apt-get upgrade
-yes | sudo apt-get dist-upgrade
-yes | sudo apt-get full-upgrade
-yes | sudo apt-get --purge autoremove
+# MANUAL
+# yes | sudo apt-get update
+# yes | sudo apt-get upgrade
+# yes | sudo apt-get dist-upgrade
+# yes | sudo apt-get full-upgrade
+# yes | sudo apt-get update
+# yes | sudo apt-get --purge autoremove
+# yes | sudo apt-get autoclean
+# yes | sudo update-grub
+# sudo reboot
 
-# Needed for downloading stuff.
-yes | sudo apt-get install wget
-yes | sudo apt-get install curl
-yes | sudo apt-get install git
-
-# Remove old kernel.
-# sudo apt-get --purge remove linux-image-5.4.0-26-generic
-# sudo apt-get update
+# Then remove the old Linux kernel.
+# uname -r
+# dpkg --list "*linux-image*" | grep ii
+# yes | sudo apt-get --purge remove linux-image-VERSION
+# yes | sudo apt-get update
+# yes | sudo apt-get full-upgrade
+# yes | sudo apt-get --purge autoremove
+# yes | sudo apt-get autoclean
 # sudo update-grub
 
-yes | sudo apt-get install wine
-yes | sudo apt-get install wine32
-yes | sudo apt-get install wine64
-
-# LMMS and Ardour DAWs.
-yes | sudo apt-get install lmms
-yes | sudo apt-get install ardour
-
-# Install nordvpn.
-wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
-yes | sudo apt-get install ./nordvpn-release_1.0.0_all.deb
-yes | sudo apt-get update
-yes | sudo apt-get install nordvpn
-yes | sudo apt-get update
+# Then reboot and run this file.
 
 # Remove several things that come pre-installed.
 yes | sudo apt-get remove --purge mozc-data
@@ -59,9 +61,6 @@ yes | sudo apt-get remove --purge khmerconverter
 yes | sudo apt-get remove --purge mlterm
 yes | sudo apt-get remove --purge xiterm+thai
 yes | sudo apt-get remove --purge xterm
-
-# Remove dependencies that are no longer needed.
-yes | sudo apt-get autoremove
 
 # Optional, remove games from work computer.
 yes | sudo apt-get remove --purge aisleriot
@@ -85,22 +84,69 @@ yes | sudo apt-get remove --purge gnome-taquin
 yes | sudo apt-get remove --purge gnome-tetravex
 yes | sudo apt-get remove --purge lightsoff
 yes | sudo apt-get --purge autoremove
+yes | sudo apt-get autoclean
 
+# Useful stuff.
+yes | sudo apt-get install wget
+yes | sudo apt-get install curl
+yes | sudo apt-get install git
+yes | sudo apt-get install wine
+yes | sudo apt-get install wine32
+yes | sudo apt-get install wine64
+yes | sudo apt-get install lmms
+yes | sudo apt-get install ardour
 yes | sudo apt-get --fix-broken install
 
-# Needed to run the following from https://wiki.debian.org/AtiHowTo
-yes | sudo apt-get update
-yes | sudo apt-get install firmware-amd-graphics
-yes | sudo apt-get install libgl1-mesa-dri
-yes | sudo apt-get install libglx-mesa0
-yes | sudo apt-get install mesa-vulkan-drivers
-yes | sudo apt-get install xserver-xorg-video-all
+# Needed to use Saffire pro 40. The PulseAudio drivers work, but have
+# occasional xruns. The Jack Audio server, when using the FFADO drivers, works
+# perfect. A few steps are needed to get it running.
 
-# Needed for the wifi and bluetooth antenna that came with the motherboard.
-yes | sudo apt-get install firmware-iwlwifi
+# The following comments are from KX studio.
+
+# Install required dependencies if needed
+yes | sudo apt-get install apt-transport-https gpgv
+
+# Remove legacy repos
+sudo dpkg --purge kxstudio-repos-gcc5
+
+# Download package file
+wget https://launchpad.net/~kxstudio-debian/+archive/kxstudio/+files/kxstudio-repos_10.0.3_all.deb
+
+# Install it
+yes | sudo dpkg -i kxstudio-repos_10.0.3_all.deb
+rm -f kxstudio-repos_10.0.3_all.deb
+
+# Now install jack and all the necessary FFADO stuff.
+yes | sudo apt-get update
+yes | sudo apt-get full-upgrade
+yes | sudo apt-get install jackd2
+yes | sudo apt-get install jackd2-firewire
+yes | sudo apt-get install ffado-dbus-server
+yes | sudo apt-get install ffado-mixer-qt4
+yes | sudo apt-get install multimedia-firewire
+yes | sudo apt-get install cadence
+yes | sudo apt-get install ffado-tools
+yes | sudo apt-get install libffado2
+
+# You then need to blacklist snd_dice. Add the following file:
+sudo touch /etc/modprobe.d/alsa-nope.conf
+echo "blacklist snd_dice" | sudo tee -a /etc/modprobe.d/alsa-nope.conf
+
+# You'll need to reboot for all of this to go into effect.
 
 # Finish up.
 yes | sudo apt-get update
 yes | sudo apt-get upgrade
 yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
+
+# Old, for amdgpu and wifi card.
+#    yes | sudo apt-get install firmware-amd-graphics
+#    yes | sudo apt-get install libgl1-mesa-dri
+#    yes | sudo apt-get install libglx-mesa0
+#    yes | sudo apt-get install mesa-vulkan-drivers
+#    yes | sudo apt-get install xserver-xorg-video-all
+
+# Needed for the wifi and bluetooth antenna that came with the motherboard.
+#    yes | sudo apt-get install firmware-iwlwifi
+

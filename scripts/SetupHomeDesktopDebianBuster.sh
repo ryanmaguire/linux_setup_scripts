@@ -86,6 +86,7 @@ yes | sudo apt-get remove --purge gnome-tetravex
 yes | sudo apt-get remove --purge lightsoff
 yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
+yes | sudo apt-get update
 
 # To add calendars for Microsoft Exchange (UML and Dartmouth)
 # add evolution-ews. On Buster this is available on backports.
@@ -200,6 +201,7 @@ yes | sudo apt-get --fix-broken install
 yes | sudo apt-get full-upgrade
 yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
+yes | sudo apt-get update
 
 sudo reboot
 
