@@ -95,6 +95,7 @@ yes | sudo apt-get install wine32
 yes | sudo apt-get install wine64
 yes | sudo apt-get install lmms
 yes | sudo apt-get install ardour
+yes | sudo apt-get install evolution-ews
 yes | sudo apt-get --fix-broken install
 
 # Needed to use Saffire pro 40. The PulseAudio drivers work, but have
@@ -125,12 +126,15 @@ yes | sudo apt-get install ffado-dbus-server
 yes | sudo apt-get install ffado-mixer-qt4
 yes | sudo apt-get install multimedia-firewire
 yes | sudo apt-get install cadence
+yes | sudo apt-get install carla
+yes | sudo apt-get install catia
 yes | sudo apt-get install ffado-tools
 yes | sudo apt-get install libffado2
 
 # You then need to blacklist snd_dice. Add the following file:
 sudo touch /etc/modprobe.d/alsa-nope.conf
 echo "blacklist snd_dice" | sudo tee -a /etc/modprobe.d/alsa-nope.conf
+sudo usermod -a -G audio $(whoami)
 
 # You'll need to reboot for all of this to go into effect.
 
