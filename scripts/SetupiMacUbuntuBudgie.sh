@@ -52,7 +52,7 @@ yes | sudo apt-get update
 
 # Signal and VSCode are on the Ubuntu repositories.
 sudo snap install signal-desktop
-sudo snap install code
+sudo snap install --classic vscode
 
 # Refind. Easier for managing the Windows and macOS installs on this computer.
 yes | sudo apt-add-repository ppa:rodsmith/refind
