@@ -45,14 +45,10 @@ wget https://zoom.us/client/latest/zoom_amd64.deb
 yes | sudo apt-get install ./zoom_amd64.deb
 yes | sudo apt-get update
 
-# Install Caprine Facebook messenger for Molly.
-wget https://github.com/sindresorhus/caprine/releases/download/v2.54.0/caprine_2.54.0_amd64.deb
-yes | sudo apt-get install ./caprine_2.54.0_amd64.deb
-yes | sudo apt-get update
-
-# Signal and VSCode are on the Ubuntu repositories.
-sudo snap install signal-desktop
-sudo snap install --classic vscode
+# Signal, caprine, and VSCode are on the Ubuntu repositories.
+yes | sudo snap install signal-desktop
+yes | sudo snap install --classic vscode
+yes | sudo snap install caprine
 
 # Refind. Easier for managing the Windows and macOS installs on this computer.
 yes | sudo apt-add-repository ppa:rodsmith/refind
