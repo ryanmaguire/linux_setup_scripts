@@ -28,10 +28,8 @@
 # Then reboot and run this file.
 
 # Install useful stuff.
-yes | sudo apt-get install build-essential
-yes | sudo apt-get install wget
-yes | sudo apt-get install curl
-yes | sudo apt-get install git
+yes | sudo apt-get install build-essential wget curl
+ git
 yes | sudo apt-get update
 
 # Install signal. These are the comments from signal.

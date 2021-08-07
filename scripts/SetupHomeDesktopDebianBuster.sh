@@ -44,45 +44,21 @@
 # Then reboot and run this file.
 
 # Remove several things that come pre-installed.
-yes | sudo apt-get remove --purge mozc-data
-yes | sudo apt-get remove --purge hdate-applet
-yes | sudo apt-get remove --purge anthy
-yes | sudo apt-get remove --purge anthy-common
-yes | sudo apt-get remove --purge debian-reference
+yes | sudo apt-get remove --purge mozc-data hdate-applet anthy anthy-common
+yes | sudo apt-get remove --purge debian-reference debian-reference-common
 yes | sudo apt-get remove --purge debian-reference-common
-yes | sudo apt-get remove --purge fcitx
-yes | sudo apt-get remove --purge fcitx-anthy
-yes | sudo apt-get remove --purge fcitx-config-common
-yes | sudo apt-get remove --purge fcitx5
-yes | sudo apt-get remove --purge fcitx-data
-yes | sudo apt-get remove --purge fcitx5-data
-yes | sudo apt-get remove --purge goldendict
-yes | sudo apt-get remove --purge khmerconverter
-yes | sudo apt-get remove --purge mlterm
-yes | sudo apt-get remove --purge xiterm+thai
-yes | sudo apt-get remove --purge xterm
+yes | sudo apt-get remove --purge fcitx fcitx-anthy fcitx-config-common fcitx5
+yes | sudo apt-get remove --purge fcitx-data fcitx5-data goldendict
+yes | sudo apt-get remove --purge khmerconverter mlterm xiterm+thai xterm
 
 # Optional, remove games from work computer.
 #    I've an addiction to solitaire. Keeping this one.
 #    yes | sudo apt-get remove --purge aisleriot
-yes | sudo apt-get remove --purge gnome-mahjongg
-yes | sudo apt-get remove --purge mah-jongg
-yes | sudo apt-get remove --purge five-or-more
-yes | sudo apt-get remove --purge four-in-a-row
-yes | sudo apt-get remove --purge hitori
-yes | sudo apt-get remove --purge gnome-klotski
-yes | sudo apt-get remove --purge iagno
-yes | sudo apt-get remove --purge gnome-mines
-yes | sudo apt-get remove --purge mlterm
-yes | sudo apt-get remove --purge gnome-music
-yes | sudo apt-get remove --purge gnome-nibbles
-yes | sudo apt-get remove --purge quadrapassel
-yes | sudo apt-get remove --purge gnome-robots
-yes | sudo apt-get remove --purge gnome-sudoku
-yes | sudo apt-get remove --purge swell-foop
-yes | sudo apt-get remove --purge tali
-yes | sudo apt-get remove --purge gnome-taquin
-yes | sudo apt-get remove --purge gnome-tetravex
+yes | sudo apt-get remove --purge gnome-mahjongg mah-jongg five-or-more
+yes | sudo apt-get remove --purge four-in-a-row hitori gnome-klotski iagno
+yes | sudo apt-get remove --purge gnome-mines mlterm gnome-music gnome-nibbles
+yes | sudo apt-get remove --purge quadrapassel gnome-robots gnome-sudoku
+yes | sudo apt-get remove --purge swell-foop tali gnome-taquin gnome-tetravex
 yes | sudo apt-get remove --purge lightsoff
 yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
@@ -102,24 +78,11 @@ yes | sudo apt-get update
 yes | sudo apt-get install -t buster-backports evolution-ews
 
 # Install useful things.
-yes | sudo apt-get install wget
-yes | sudo apt-get install curl
-yes | sudo apt-get install rsync
-yes | sudo apt-get install plotutils
-yes | sudo apt-get install openvpn
-yes | sudo apt-get install network-manager-openvpn
-yes | sudo apt-get install git
-yes | sudo apt-get install texlive-full
-yes | sudo apt-get install calibre
-yes | sudo apt-get install gnome-boxes
-yes | sudo apt-get install neofetch
-yes | sudo apt-get install libcairo2-dev
-yes | sudo apt-get install gthumb
-yes | sudo apt-get install gnome-builder
-yes | sudo apt-get install vlc
-yes | sudo apt-get install sagemath
-yes | sudo apt-get install ipython3
-yes | sudo apt-get install gnudatalanguage
+yes | sudo apt-get install wget curl rsync git plotutils gcc tcc pcc clang
+yes | sudo apt-get install openvpn network-manager-openvpn gnome-boxes
+yes | sudo apt-get install libcairo2-dev libsecret-1-0 libsecret-1-dev
+yes | sudo apt-get install gnome-builder calibre neofetch gthumb vlc qbittorrent
+yes | sudo apt-get install sagemath ipython3 gnudatalanguage texlive-full
 yes | sudo apt-get update
 
 # Knot theory stuff.
@@ -144,12 +107,8 @@ yes | sudo apt install signal-desktop
 
 # Set up git password in GNOME Keyring. You will need to create a personal
 # access token with GitHub for this.
-yes | sudo apt-get install libsecret-1-0
-yes | sudo apt-get install libsecret-1-dev
 sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
 git config --global credential.helper /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
-
-# Then use this:
 git config --global user.email ryan_maguire@student.uml.edu
 
 # Clone repos.
@@ -187,14 +146,15 @@ yes | sudo apt-get install ffado-dbus-server
 yes | sudo apt-get install ffado-mixer-qt4
 yes | sudo apt-get install multimedia-firewire
 yes | sudo apt-get install cadence
+yes | sudo apt-get install carla
+yes | sudo apt-get install catia
 yes | sudo apt-get install ffado-tools
 yes | sudo apt-get install libffado2
 
 # You then need to blacklist snd_dice. Add the following file:
 sudo touch /etc/modprobe.d/alsa-nope.conf
 echo "blacklist snd_dice" | sudo tee -a /etc/modprobe.d/alsa-nope.conf
-
-# You'll need to reboot for all of this to go into effect.
+sudo usermod -a -G audio $(whoami)
 
 # Run this in case anything broke.
 yes | sudo apt-get --fix-broken install
@@ -205,7 +165,7 @@ yes | sudo apt-get update
 
 sudo reboot
 
-# Old, for amdgpu and wifi card.
+# Old, for amdgpu and wifi card. Requires NON-FREE, so I removed it.
 #    yes | sudo apt-get install firmware-amd-graphics
 #    yes | sudo apt-get install libgl1-mesa-dri
 #    yes | sudo apt-get install libglx-mesa0
