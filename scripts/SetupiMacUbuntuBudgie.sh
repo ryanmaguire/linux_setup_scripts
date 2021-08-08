@@ -7,7 +7,7 @@
 # Install useful things.
 sudo apt-get update && yes | sudo apt-get full-upgrade
 yes | sudo apt-get install wget rsync git plotutils gcc tcc pcc clang
-yes | sudo apt-get install neofetch vlc qbittorrent libreoffice
+yes | sudo apt-get install neofetch vlc qbittorrent libreoffice evolution-ews
 yes | sudo apt-get install sagemath ipython3 gnudatalanguage texlive-full
 sudo apt-get update
 
