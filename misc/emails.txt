@@ -1,5 +1,6 @@
 Add email/Online Accounts. Microsoft and Google are normal.
-UML and Dartmouth accounts can be set up via IMAP/SMTP.
+Dartmouth can be set up with evolution-ews installed.
+
 Yahoo needs a special two-factor password. Go to:
   https://login.yahoo.com/account/security/app-passwords
   In GNOME Online Accounts, select:
@@ -9,7 +10,8 @@ Yahoo needs a special two-factor password. Go to:
   smtp server: smtp.mail.yahoo.com
   username: Email without @yahoo.com
   encryption: SSL
-For iCLoud emai;
+
+For iCLoud email:
   imap server: imap.mail.me.com
   port: 993
   encryption: SSL

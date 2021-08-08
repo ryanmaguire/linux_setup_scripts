@@ -8,95 +8,28 @@
 #   RAM:    Ripjaw DDR4-3600 16GBx2
 #   MB:     Gigabyte Aorus x570 Elite WiFi
 
-# Give sudo permission to user.
-# Go to /etc/sudoers. You'll need root permissions so:
-#    su
-#    nano /etc/sudoers
-# Add the line:
-#    %ryan    ALL=(ALL:ALL) ALL
-# Save the changes and then run:
-#    apt-get update
-#    exit
-# You're no longer running as root, but should have sudo permission.
-# Check this with sudo apt-get update
-
-# MANUAL
-# yes | sudo apt-get update
-# yes | sudo apt-get upgrade
-# yes | sudo apt-get dist-upgrade
-# yes | sudo apt-get full-upgrade
-# yes | sudo apt-get update
-# yes | sudo apt-get --purge autoremove
-# yes | sudo apt-get autoclean
-# yes | sudo update-grub
-# sudo reboot
-
-# Then remove the old Linux kernel.
-# uname -r
-# dpkg --list "*linux-image*" | grep ii
-# yes | sudo apt-get --purge remove linux-image-VERSION
-# yes | sudo apt-get update
-# yes | sudo apt-get full-upgrade
-# yes | sudo apt-get --purge autoremove
-# yes | sudo apt-get autoclean
-# sudo update-grub
-
-# Then reboot and run this file.
-
 # Remove several things that come pre-installed.
-yes | sudo apt-get remove --purge mozc-data
-yes | sudo apt-get remove --purge hdate-applet
-yes | sudo apt-get remove --purge anthy
-yes | sudo apt-get remove --purge anthy-common
-yes | sudo apt-get remove --purge debian-reference
+yes | sudo apt-get remove --purge mozc-data hdate-applet anthy anthy-common
+yes | sudo apt-get remove --purge debian-reference debian-reference-common
 yes | sudo apt-get remove --purge debian-reference-common
-yes | sudo apt-get remove --purge fcitx
-yes | sudo apt-get remove --purge fcitx-anthy
-yes | sudo apt-get remove --purge fcitx-config-common
-yes | sudo apt-get remove --purge fcitx5
-yes | sudo apt-get remove --purge fcitx-data
-yes | sudo apt-get remove --purge fcitx5-data
-yes | sudo apt-get remove --purge goldendict
-yes | sudo apt-get remove --purge khmerconverter
-yes | sudo apt-get remove --purge mlterm
-yes | sudo apt-get remove --purge xiterm+thai
-yes | sudo apt-get remove --purge xterm
+yes | sudo apt-get remove --purge fcitx fcitx-anthy fcitx-config-common fcitx5
+yes | sudo apt-get remove --purge fcitx-data fcitx5-data goldendict
+yes | sudo apt-get remove --purge khmerconverter mlterm xiterm+thai xterm
 
 # Optional, remove games from work computer.
-yes | sudo apt-get remove --purge aisleriot
-yes | sudo apt-get remove --purge gnome-mahjongg
-yes | sudo apt-get remove --purge mah-jongg
-yes | sudo apt-get remove --purge five-or-more
-yes | sudo apt-get remove --purge four-in-a-row
-yes | sudo apt-get remove --purge hitori
-yes | sudo apt-get remove --purge gnome-klotski
-yes | sudo apt-get remove --purge iagno
-yes | sudo apt-get remove --purge gnome-mines
-yes | sudo apt-get remove --purge mlterm
-yes | sudo apt-get remove --purge gnome-music
-yes | sudo apt-get remove --purge gnome-nibbles
-yes | sudo apt-get remove --purge quadrapassel
-yes | sudo apt-get remove --purge gnome-robots
-yes | sudo apt-get remove --purge gnome-sudoku
-yes | sudo apt-get remove --purge swell-foop
-yes | sudo apt-get remove --purge tali
-yes | sudo apt-get remove --purge gnome-taquin
-yes | sudo apt-get remove --purge gnome-tetravex
-yes | sudo apt-get remove --purge lightsoff
+yes | sudo apt-get remove --purge gnome-mahjongg mah-jongg five-or-more
+yes | sudo apt-get remove --purge four-in-a-row hitori gnome-klotski iagno
+yes | sudo apt-get remove --purge gnome-mines mlterm gnome-music gnome-nibbles
+yes | sudo apt-get remove --purge quadrapassel gnome-robots gnome-sudoku
+yes | sudo apt-get remove --purge swell-foop tali gnome-taquin gnome-tetravex
+yes | sudo apt-get remove --purge lightsoff aisleriot
 yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
+yes | sudo apt-get update
 
 # Useful stuff.
-yes | sudo apt-get install wget
-yes | sudo apt-get install curl
-yes | sudo apt-get install git
-yes | sudo apt-get install wine
-yes | sudo apt-get install wine32
-yes | sudo apt-get install wine64
-yes | sudo apt-get install lmms
-yes | sudo apt-get install ardour
+yes | sudo apt-get install wget curl git wine wine32 wine64 lmms ardour
 yes | sudo apt-get install evolution-ews
-yes | sudo apt-get --fix-broken install
 
 # Needed to use Saffire pro 40. The PulseAudio drivers work, but have
 # occasional xruns. The Jack Audio server, when using the FFADO drivers, works
@@ -120,37 +53,18 @@ rm -f kxstudio-repos_10.0.3_all.deb
 # Now install jack and all the necessary FFADO stuff.
 yes | sudo apt-get update
 yes | sudo apt-get full-upgrade
-yes | sudo apt-get install jackd2
-yes | sudo apt-get install jackd2-firewire
-yes | sudo apt-get install ffado-dbus-server
-yes | sudo apt-get install ffado-mixer-qt4
-yes | sudo apt-get install multimedia-firewire
-yes | sudo apt-get install cadence
-yes | sudo apt-get install carla
-yes | sudo apt-get install catia
-yes | sudo apt-get install ffado-tools
-yes | sudo apt-get install libffado2
+yes | sudo apt-get install jackd2 jackd2-firewire ffado-dbus-server
+yes | sudo apt-get install ffado-mixer-qt4 multimedia-firewire
+yes | sudo apt-get install cadence carla catia ffado-tools libffado2
 
 # You then need to blacklist snd_dice. Add the following file:
 sudo touch /etc/modprobe.d/alsa-nope.conf
 echo "blacklist snd_dice" | sudo tee -a /etc/modprobe.d/alsa-nope.conf
 sudo usermod -a -G audio $(whoami)
 
-# You'll need to reboot for all of this to go into effect.
-
 # Finish up.
 yes | sudo apt-get update
 yes | sudo apt-get upgrade
 yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
-
-# Old, for amdgpu and wifi card.
-#    yes | sudo apt-get install firmware-amd-graphics
-#    yes | sudo apt-get install libgl1-mesa-dri
-#    yes | sudo apt-get install libglx-mesa0
-#    yes | sudo apt-get install mesa-vulkan-drivers
-#    yes | sudo apt-get install xserver-xorg-video-all
-
-# Needed for the wifi and bluetooth antenna that came with the motherboard.
-#    yes | sudo apt-get install firmware-iwlwifi
-
+sudo reboot

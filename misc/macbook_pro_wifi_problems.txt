@@ -1,0 +1,17 @@
+These problems no longer exists with MacBook Pro 2012, 13" running Debian.
+Keeping these notes here in case its useful later.
+
+Fix mac address problem. Go to /etc/NetworkManager/NetworkManager.conf
+Add the lines:
+    [device]
+    wifi.scan-rand-mac-address=no
+
+Save and run:
+    sudo systemctl restart NetworkManager
+    /etc/init.d/network-manager restart
+
+Go to /etc/network/
+    sudo nano interfaces
+
+Comment out the line:
+    source /etc/network/interfaces.d/*
