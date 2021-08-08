@@ -6,8 +6,8 @@
 
 # Install useful things.
 sudo apt-get update && yes | sudo apt-get full-upgrade
-yes | sudo apt-get install wget curl rsync git plotutils gcc tcc pcc clang
-yes | sudo apt-get install gnome-builder calibre neofetch gthumb vlc qbittorrent
+yes | sudo apt-get install wget rsync git plotutils gcc tcc pcc clang
+yes | sudo apt-get install neofetch vlc qbittorrent libreoffice
 yes | sudo apt-get install sagemath ipython3 gnudatalanguage texlive-full
 sudo apt-get update
 
@@ -41,4 +41,12 @@ yes | sudo apt-get full-upgrade
 yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
 sudo apt-get update
+
+# Clone repos.
+cd ~/Documents
+git clone https://github.com/ryanmaguire/Mathematics-and-Physics.git
+git clone https://github.com/ryanmaguire/libtmpl.git
+git clone https://github.com/ryanmaguire/LinuxSetupScripts.git
+git clone https://github.com/NASA-Planetary-Science/rss_ringoccs.git
+
 sudo reboot
