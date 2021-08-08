@@ -5,33 +5,40 @@
 # Device:	Mid 2017 iMac 27" 5K Retina Display.
 
 # Install useful things.
+sudo apt-get update && yes | sudo apt-get full-upgrade
 yes | sudo apt-get install wget curl rsync git plotutils gcc tcc pcc clang
 yes | sudo apt-get install gnome-builder calibre neofetch gthumb vlc qbittorrent
 yes | sudo apt-get install sagemath ipython3 gnudatalanguage texlive-full
-yes | sudo apt-get update
+sudo apt-get update
+
+# VSCode is on snap.
+yes | sudo snap install --classic code
+
+# Install signal.
+wget -O- https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
+echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
+sudo apt update && sudo apt install --yes signal-desktop
 
 # Install nordvpn.
 wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
-yes | sudo apt-get install ./nordvpn-release_1.0.0_all.deb
-yes | sudo apt-get update
-yes | sudo apt-get install nordvpn
-yes | sudo apt-get update
+sudo apt-get install --yes ./nordvpn-release_1.0.0_all.deb
+sudo apt-get update && sudo apt-get install --yes nordvpn
+rm -f nordvpn-release_1.0.0_all.deb
 
 # Install zoom.
 wget https://zoom.us/client/latest/zoom_amd64.deb
-yes | sudo apt-get install ./zoom_amd64.deb
-yes | sudo apt-get update
+sudo apt-get update && sudo apt-get install --yes ./zoom_amd64.deb
+rm -f zoom_amd64.deb
 
-# Signal, caprine, and VSCode are on the Ubuntu repositories.
-yes | sudo snap install signal-desktop
-yes | sudo snap install --classic code
-yes | sudo snap install caprine
+# Install Caprine Facebook messenger for Molly.
+wget https://github.com/sindresorhus/caprine/releases/download/v2.54.0/caprine_2.54.0_amd64.deb
+sudo apt-get update && sudo apt-get install --yes ./caprine_2.54.0_amd64.deb
+rm -f caprine_2.54.0_amd64.deb
 
 # Run this in case anything broke.
 yes | sudo apt-get --fix-broken install
 yes | sudo apt-get full-upgrade
 yes | sudo apt-get --purge autoremove
 yes | sudo apt-get autoclean
-yes | sudo apt-get update
-
+sudo apt-get update
 sudo reboot
