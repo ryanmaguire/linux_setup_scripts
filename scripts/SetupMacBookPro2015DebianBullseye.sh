@@ -89,13 +89,10 @@ yes | sudo apt-get install vlc
 yes | sudo apt-get install gnudatalanguage
 yes | sudo apt-get install sagemath
 yes | sudo apt-get install ipython3
-<<<<<<< HEAD
 yes | sudo apt-get install wget
-=======
 yes | sudo apt-get install texlive-full
 yes | sudo apt-get install jami
 yes | sudo apt-get install gthumb
->>>>>>> bac9fafcc91856154828d51500868615fede98d6
 yes | sudo apt-get update
 
 # Install signal. These are the comments from signal.
