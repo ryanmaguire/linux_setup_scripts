@@ -91,11 +91,9 @@ yes | sudo dpkg -i kxstudio-repos_10.0.3_all.deb
 rm -f kxstudio-repos_10.0.3_all.deb
 
 # Now install jack and all the necessary FFADO stuff.
-yes | sudo apt-get update
-yes | sudo apt-get full-upgrade
-yes | sudo apt-get install jackd2 jackd2-firewire ffado-dbus-server
-yes | sudo apt-get install ffado-mixer-qt4 multimedia-firewire
-yes | sudo apt-get install cadence carla catia ffado-tools libffado2
+sudo apt-get update
+yes | sudo apt-get install jackd2 jackd2-firewire ffado-dbus-server libffado2
+yes | sudo apt-get install multimedia-firewire cadence carla catia ffado-tools
 
 # You then need to blacklist snd_dice. Add the following file:
 sudo touch /etc/modprobe.d/alsa-nope.conf
