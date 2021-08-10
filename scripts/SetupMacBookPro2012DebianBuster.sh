@@ -4,13 +4,6 @@
 # OS:		Debian 10 Buster.
 # Device:	Mid 2012 MacBook Pro 13"
 
-# Add yourself to the sudoers file:
-#   su
-
-# Then alter /etc/sudoers adding the following line:
-#   %ryan	ALL=(ALL:ALL) ALL
-
-
 # Remove several things that come pre-installed.
 yes | sudo apt-get remove --purge mozc-data hdate-applet anthy anthy-common
 yes | sudo apt-get remove --purge debian-reference debian-reference-common
@@ -19,38 +12,31 @@ yes | sudo apt-get remove --purge fcitx fcitx-anthy fcitx-config-common fcitx5
 yes | sudo apt-get remove --purge fcitx-data fcitx5-data goldendict
 yes | sudo apt-get remove --purge khmerconverter mlterm xiterm+thai xterm
 
-# To add calendars for Microsoft Exchange (UML and Dartmouth)
-# add evolution-ews. On Buster this is available on backports.
-# Add to /etc/apt/sources.list:
+# Needed for Microsoft Exchange emails.
 echo -e "\n# Needed for evolution-ews." | sudo tee -a /etc/apt/sources.list
-echo "deb http://ftp.debian.org/debian buster-backports main" |\
-  sudo tee -a /etc/apt/sources.list
-echo "deb-src http://ftp.debian.org/debian buster-backports main" |\
-  sudo tee -a /etc/apt/sources.list
-sudo apt-get update
-yes | sudo apt-get install -t buster-backports evolution-ews
+echo "deb http://ftp.debian.org/debian buster-backports main" | sudo tee -a /etc/apt/sources.list
+echo "deb-src http://ftp.debian.org/debian buster-backports main" | sudo tee -a /etc/apt/sources.list
+sudo apt-get update && yes | sudo apt-get install -t buster-backports evolution-ews
 
 # Install useful things.
 yes | sudo apt-get install wget curl rsync git plotutils gcc tcc pcc clang
-yes | sudo apt-get install openvpn network-manager-openvpn
-yes | sudo apt-get install libcairo2-dev libsecret-1-0 libsecret-1-dev
-yes | sudo apt-get install gnome-builder calibre neofetch gthumb vlc qbittorrent
-yes | sudo apt-get install sagemath ipython3 gnudatalanguage texlive-full
+yes | sudo apt-get install openvpn network-manager-openvpn gnome-boxes snapd
+yes | sudo apt-get install libcairo2-dev gnome-builder calibre neofetch gthumb
+yes | sudo apt-get install sagemath ipython3 gnudatalanguage texlive-full vlc
+yes | sudo apt-get update
+
+# VSCode is on snap.
+yes | sudo snap install code --classic
 
 # Need non-free and contrib for WiFi and graphics drivers. This assumes you
 # used the main Debian installer, and not the non-free one that has these
 # repositories already listed.
-echo -e "\n# Needed for WiFi and graphics drivers." |\
-  sudo tee -a /etc/apt/sources.list
-echo "deb http://deb.debian.org/debian/ buster contrib non-free" |\
-  sudo tee -a /etc/apt/sources.list
-echo "deb-src http://deb.debian.org/debian/ buster contrib non-free" |\
-  sudo tee -a /etc/apt/sources.list
-
-# Update the new sources.list.
-yes | sudo apt-get update
+echo -e "\n# Needed for WiFi and graphics drivers." | sudo tee -a /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian/ buster contrib non-free" | sudo tee -a /etc/apt/sources.list
+echo "deb-src http://deb.debian.org/debian/ buster contrib non-free" | sudo tee -a /etc/apt/sources.list
 
 # Update pciids. This is for the WiFi card.
+sudo apt-get update
 yes | sudo update-pciids
 
 # Install the WiFi drivers. You will need to restart for these to be active.
@@ -72,20 +58,17 @@ echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" |\
 # 3. Update your package database and install signal
 sudo apt update && sudo apt install --yes signal-desktop
 
-# Set up git password in GNOME Keyring.
-sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
-git config --global credential.helper /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
-git config --global user.email ryan_maguire@student.uml.edu
-
-# Clone my repos.
+# Clone repos.
 cd ~/Documents
 git clone https://github.com/ryanmaguire/Mathematics-and-Physics.git
 git clone https://github.com/ryanmaguire/libtmpl.git
 git clone https://github.com/ryanmaguire/LinuxSetupScripts.git
 git clone https://github.com/NASA-Planetary-Science/rss_ringoccs.git
+git config --global credential.helper store
 
 # And some cleanup.
-yes | sudo apt-get update
+sudo apt-get update
 yes | sudo apt-get --fix-broken install
 yes | sudo apt-get --purge autoremove
-yes | sudo apt-get autoclean
+sudo apt-get autoclean
+sudo reboot

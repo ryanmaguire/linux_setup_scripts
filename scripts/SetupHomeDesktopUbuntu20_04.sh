@@ -8,15 +8,19 @@
 #   RAM:    Ripjaw DDR4-3600 16GBx2
 #   MB:     Gigabyte Aorus x570 Elite WiFi
 
-# Remove several things that come pre-installed.
+# I selected the minimum install, no third-party stuff, for Ubuntu 20.04. In
+# particular, this is the standard GNOME version.
+
+# POD Farm and Steven Slate Drums can be installed via Wine. Same with other
+# plugins. Make sure to download the windows version.
+
+# Remove a few things that may be preinstalled.
 yes | sudo apt-get remove --purge mozc-data hdate-applet anthy anthy-common
 yes | sudo apt-get remove --purge debian-reference debian-reference-common
 yes | sudo apt-get remove --purge debian-reference-common
 yes | sudo apt-get remove --purge fcitx fcitx-anthy fcitx-config-common fcitx5
 yes | sudo apt-get remove --purge fcitx-data fcitx5-data goldendict
 yes | sudo apt-get remove --purge khmerconverter mlterm xiterm+thai xterm
-
-# Optional, remove games from work computer.
 yes | sudo apt-get remove --purge gnome-mahjongg mah-jongg five-or-more
 yes | sudo apt-get remove --purge four-in-a-row hitori gnome-klotski iagno
 yes | sudo apt-get remove --purge gnome-mines mlterm gnome-music gnome-nibbles
@@ -24,16 +28,15 @@ yes | sudo apt-get remove --purge quadrapassel gnome-robots gnome-sudoku
 yes | sudo apt-get remove --purge swell-foop tali gnome-taquin gnome-tetravex
 yes | sudo apt-get remove --purge lightsoff aisleriot
 yes | sudo apt-get --purge autoremove
-yes | sudo apt-get autoclean
-yes | sudo apt-get update
+sudo apt-get autoclean
+sudo apt-get update
 
 # Useful stuff.
 yes | sudo apt-get install wget curl git wine wine32 wine64 lmms ardour
-yes | sudo apt-get install evolution-ews
+yes | sudo apt-get install evolution-ews carla-bridge-win32 carla-bridge-win64
 
 # Needed to use Saffire pro 40. The PulseAudio drivers work, but have
-# occasional xruns. The Jack Audio server, when using the FFADO drivers, works
-# perfect. A few steps are needed to get it running.
+# occasional xruns. JACK, using the FFADO drivers, works perfect.
 
 # The following comments are from KX studio.
 
@@ -51,20 +54,19 @@ yes | sudo dpkg -i kxstudio-repos_10.0.3_all.deb
 rm -f kxstudio-repos_10.0.3_all.deb
 
 # Now install jack and all the necessary FFADO stuff.
-yes | sudo apt-get update
-yes | sudo apt-get full-upgrade
-yes | sudo apt-get install jackd2 jackd2-firewire ffado-dbus-server
-yes | sudo apt-get install ffado-mixer-qt4 multimedia-firewire
-yes | sudo apt-get install cadence carla catia ffado-tools libffado2
+sudo apt-get update
+yes | sudo apt-get install jackd2 jackd2-firewire ffado-dbus-server libffado2
+yes | sudo apt-get install multimedia-firewire cadence carla catia ffado-tools
 
 # You then need to blacklist snd_dice. Add the following file:
 sudo touch /etc/modprobe.d/alsa-nope.conf
 echo "blacklist snd_dice" | sudo tee -a /etc/modprobe.d/alsa-nope.conf
 sudo usermod -a -G audio $(whoami)
 
-# Finish up.
-yes | sudo apt-get update
-yes | sudo apt-get upgrade
+# Run this in case anything broke.
+sudo apt-get update
+yes | sudo apt-get --fix-broken install
+yes | sudo apt-get full-upgrade
 yes | sudo apt-get --purge autoremove
-yes | sudo apt-get autoclean
+sudo apt-get autoclean
 sudo reboot

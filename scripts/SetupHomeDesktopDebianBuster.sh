@@ -24,8 +24,8 @@ yes | sudo apt-get remove --purge quadrapassel gnome-robots gnome-sudoku
 yes | sudo apt-get remove --purge swell-foop tali gnome-taquin gnome-tetravex
 yes | sudo apt-get remove --purge lightsoff aisleriot
 yes | sudo apt-get --purge autoremove
-yes | sudo apt-get autoclean
-yes | sudo apt-get update
+sudo apt-get autoclean
+sudo apt-get update
 
 # Needed for Microsoft Exchange emails.
 echo -e "\n# Needed for evolution-ews." | sudo tee -a /etc/apt/sources.list
@@ -35,11 +35,13 @@ sudo apt-get update && yes | sudo apt-get install -t buster-backports evolution-
 
 # Install useful things.
 yes | sudo apt-get install wget curl rsync git plotutils gcc tcc pcc clang
-yes | sudo apt-get install openvpn network-manager-openvpn gnome-boxes
-yes | sudo apt-get install libcairo2-dev libsecret-1-0 libsecret-1-dev
-yes | sudo apt-get install gnome-builder calibre neofetch gthumb vlc qbittorrent
-yes | sudo apt-get install sagemath ipython3 gnudatalanguage texlive-full
-yes | sudo apt-get update
+yes | sudo apt-get install openvpn network-manager-openvpn gnome-boxes snapd
+yes | sudo apt-get install libcairo2-dev gnome-builder calibre neofetch gthumb
+yes | sudo apt-get install sagemath ipython3 gnudatalanguage texlive-full vlc
+sudo apt-get update
+
+# VSCode is on snap.
+yes | sudo snap install code --classic
 
 # Knot theory stuff.
 yes | pip install snappy snappy_15_knots
@@ -59,21 +61,16 @@ echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" |\
 # 3. Update your package database and install signal
 sudo apt update && sudo apt install --yes signal-desktop
 
-# Set up git password in GNOME Keyring.
-sudo make --directory=/usr/share/doc/git/contrib/credential/libsecret
-git config --global credential.helper /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
-git config --global user.email ryan_maguire@student.uml.edu
-
 # Clone repos.
 cd ~/Documents
 git clone https://github.com/ryanmaguire/Mathematics-and-Physics.git
 git clone https://github.com/ryanmaguire/libtmpl.git
 git clone https://github.com/ryanmaguire/LinuxSetupScripts.git
 git clone https://github.com/NASA-Planetary-Science/rss_ringoccs.git
+git config --global credential.helper store
 
 # Needed to use Saffire pro 40. The PulseAudio drivers work, but have
-# occasional xruns. The Jack Audio server, when using the FFADO drivers, works
-# perfect. A few steps are needed to get it running.
+# occasional xruns. JACK, using the FFADO drivers, works perfect.
 
 # The following comments are from KX studio.
 
@@ -101,9 +98,9 @@ echo "blacklist snd_dice" | sudo tee -a /etc/modprobe.d/alsa-nope.conf
 sudo usermod -a -G audio $(whoami)
 
 # Run this in case anything broke.
+sudo apt-get update
 yes | sudo apt-get --fix-broken install
 yes | sudo apt-get full-upgrade
 yes | sudo apt-get --purge autoremove
-yes | sudo apt-get autoclean
-
+sudo apt-get autoclean
 sudo reboot

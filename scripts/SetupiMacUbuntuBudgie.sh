@@ -4,6 +4,8 @@
 # OS:		Debian 10 Buster.
 # Device:	Mid 2017 iMac 27" 5K Retina Display.
 
+# I selected the minimum install for this. Ubuntu Budgie 20.04.
+
 # Install useful things.
 sudo apt-get update && yes | sudo apt-get full-upgrade
 yes | sudo apt-get install wget rsync git plotutils gcc tcc pcc clang
