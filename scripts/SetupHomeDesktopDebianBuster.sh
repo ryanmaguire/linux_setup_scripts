@@ -34,8 +34,8 @@ echo "deb-src http://ftp.debian.org/debian buster-backports main" | sudo tee -a 
 sudo apt-get update && yes | sudo apt-get install -t buster-backports evolution-ews
 
 # Install useful things.
-yes | sudo apt-get install wget curl rsync git plotutils gcc tcc pcc clang
-yes | sudo apt-get install openvpn network-manager-openvpn gnome-boxes snapd
+yes | sudo apt-get install wget curl rsync plotutils gcc tcc pcc clang picard
+yes | sudo apt-get install openvpn network-manager-openvpn gnome-boxes snapd git
 yes | sudo apt-get install libcairo2-dev gnome-builder calibre neofetch gthumb
 yes | sudo apt-get install sagemath ipython3 gnudatalanguage texlive-full vlc
 sudo apt-get update
