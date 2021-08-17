@@ -58,11 +58,6 @@ sudo ./install.sh
 # Change directory back to downloads.
 cd ~/Downloads
 
-# Install the NoobsLab flat-remix theme.
-wget https://launchpad.net/~noobslab/+archive/ubuntu/themes/+files/flat-remix-gs-theme_3.12-1~xenial~NoobsLab.com_all.deb
-yes | sudo apt-get install ./flat-remix-gs-theme_3.12-1~xenial~NoobsLab.com_all.deb
-rm -f flat-remix-gs-theme_3.12-1~xenial~NoobsLab.com_all.deb
-
 # Run this in case anything broke.
 sudo apt-get update
 yes | sudo apt-get --fix-broken install
