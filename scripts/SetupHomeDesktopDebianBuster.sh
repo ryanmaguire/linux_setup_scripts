@@ -35,13 +35,14 @@ sudo apt-get update && yes | sudo apt-get install -t buster-backports evolution-
 
 # Install useful things.
 yes | sudo apt-get install wget curl rsync plotutils gcc tcc pcc clang picard
-yes | sudo apt-get install openvpn network-manager-openvpn gnome-boxes snapd git
+yes | sudo apt-get install openvpn network-manager-openvpn gnome-boxes git
 yes | sudo apt-get install libcairo2-dev gnome-builder calibre neofetch gthumb
 yes | sudo apt-get install sagemath ipython3 gnudatalanguage texlive-full vlc
+yes | sudo apt-get install obs-studio inkscape tuxguitar tuxguitar-alsa picard
 sudo apt-get update
 
 # VSCode is on snap.
-yes | sudo snap install code --classic
+# yes | sudo snap install code --classic
 
 # Knot theory stuff.
 yes | pip install snappy snappy_15_knots
@@ -62,12 +63,14 @@ echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" |\
 sudo apt update && sudo apt install --yes signal-desktop
 
 # Clone repos.
-cd ~/Documents
+mkdir ~/Projects/
+cd ~/Projects/
 git clone https://github.com/ryanmaguire/Mathematics-and-Physics.git
 git clone https://github.com/ryanmaguire/libtmpl.git
 git clone https://github.com/ryanmaguire/LinuxSetupScripts.git
 git clone https://github.com/NASA-Planetary-Science/rss_ringoccs.git
 git config --global credential.helper store
+cd ~
 
 # Needed to use Saffire pro 40. The PulseAudio drivers work, but have
 # occasional xruns. JACK, using the FFADO drivers, works perfect.
