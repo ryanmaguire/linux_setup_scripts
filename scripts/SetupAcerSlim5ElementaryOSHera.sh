@@ -28,8 +28,6 @@ sudo apt-add-repository --yes ppa:philip.scott/elementary-tweaks
 sudo apt-get install --yes elementary-tweaks
 
 # Run this in case anything broke.
-sudo apt-get update
-yes | sudo apt-get --fix-broken install
-yes | sudo apt-get --purge autoremove
-sudo apt-get autoclean
-sudo reboot
+sudo apt-get update && sudo apt-get -y --fix-broken install
+sudo apt-get -y full-upgrade && sudo apt-get -y --purge autoremove
+sudo apt-get autoclean && sudo reboot

@@ -1,6 +1,5 @@
 MANUAL THINGS.
 Sign into Firefox sync.
-Sign into nordvpn.
 Install pCloud and sync.
 Sign in to signal and sync.
 Set up git password in keyring.

@@ -19,14 +19,11 @@ echo "deb-src http://ftp.debian.org/debian buster-backports main" | sudo tee -a 
 sudo apt-get update && yes | sudo apt-get install -t buster-backports evolution-ews
 
 # Install useful things.
-yes | sudo apt-get install wget curl rsync git plotutils gcc tcc pcc clang
-yes | sudo apt-get install openvpn network-manager-openvpn gnome-boxes snapd
-yes | sudo apt-get install libcairo2-dev gnome-builder calibre neofetch gthumb
-yes | sudo apt-get install sagemath ipython3 gnudatalanguage texlive-full vlc
-yes | sudo apt-get update
-
-# VSCode is on snap.
-yes | sudo snap install code --classic
+sudo apt-get update && sudo apt-get --yes full-upgrade
+sudo apt-get install --yes wget curl rsync git plotutils gcc tcc pcc clang vlc
+sudo apt-get install --yes neofetch sagemath ipython3 gnudatalanguage gthumb
+sudo apt-get install --yes texlive-full calibre libcairo2-dev gnome-builder
+sudo apt-get install --yes inkscape tuxguitar tuxguitar-alsa
 
 # Need non-free and contrib for WiFi and graphics drivers. This assumes you
 # used the main Debian installer, and not the non-free one that has these
@@ -36,8 +33,7 @@ echo "deb http://deb.debian.org/debian/ buster contrib non-free" | sudo tee -a /
 echo "deb-src http://deb.debian.org/debian/ buster contrib non-free" | sudo tee -a /etc/apt/sources.list
 
 # Update pciids. This is for the WiFi card.
-sudo apt-get update
-yes | sudo update-pciids
+sudo apt-get update && yes | sudo update-pciids
 
 # Install the WiFi drivers. You will need to restart for these to be active.
 yes | sudo apt-get install linux-headers-$(uname -r) broadcom-sta-dkms
@@ -58,17 +54,22 @@ echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" |\
 # 3. Update your package database and install signal
 sudo apt update && sudo apt install --yes signal-desktop
 
+# Install zoom.
+wget https://zoom.us/client/latest/zoom_amd64.deb
+sudo apt-get update && sudo apt-get install --yes ./zoom_amd64.deb
+rm -f zoom_amd64.deb
+
 # Clone repos.
-cd ~/Documents
+mkdir ~/Projects/
+cd ~/Projects/
 git clone https://github.com/ryanmaguire/Mathematics-and-Physics.git
 git clone https://github.com/ryanmaguire/libtmpl.git
 git clone https://github.com/ryanmaguire/LinuxSetupScripts.git
 git clone https://github.com/NASA-Planetary-Science/rss_ringoccs.git
 git config --global credential.helper store
+cd ~
 
-# And some cleanup.
-sudo apt-get update
-yes | sudo apt-get --fix-broken install
-yes | sudo apt-get --purge autoremove
-sudo apt-get autoclean
-sudo reboot
+# Run this in case anything broke.
+sudo apt-get update && sudo apt-get -y --fix-broken install
+sudo apt-get -y full-upgrade && sudo apt-get -y --purge autoremove
+sudo apt-get autoclean && sudo reboot

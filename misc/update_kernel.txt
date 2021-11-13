@@ -1,12 +1,3 @@
-yes | sudo apt-get update
-yes | sudo apt-get upgrade
-yes | sudo apt-get dist-upgrade
-yes | sudo apt-get full-upgrade
-yes | sudo apt-get --purge autoremove
-yes | sudo apt-get autoclean
-yes | sudo update-grub
-sudo reboot
-
 uname -r
 dpkg --list "*linux-image*" | grep ii
 yes | sudo apt-get --purge remove linux-image-VERSION

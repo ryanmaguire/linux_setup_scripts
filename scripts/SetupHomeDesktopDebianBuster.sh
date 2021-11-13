@@ -15,17 +15,13 @@ yes | sudo apt-get remove --purge debian-reference-common
 yes | sudo apt-get remove --purge fcitx fcitx-anthy fcitx-config-common fcitx5
 yes | sudo apt-get remove --purge fcitx-data fcitx5-data goldendict
 yes | sudo apt-get remove --purge khmerconverter mlterm xiterm+thai xterm
-
-# Optional, remove games from work computer.
 yes | sudo apt-get remove --purge gnome-mahjongg mah-jongg five-or-more
 yes | sudo apt-get remove --purge four-in-a-row hitori gnome-klotski iagno
 yes | sudo apt-get remove --purge gnome-mines mlterm gnome-music gnome-nibbles
 yes | sudo apt-get remove --purge quadrapassel gnome-robots gnome-sudoku
 yes | sudo apt-get remove --purge swell-foop tali gnome-taquin gnome-tetravex
 yes | sudo apt-get remove --purge lightsoff aisleriot
-yes | sudo apt-get --purge autoremove
-sudo apt-get autoclean
-sudo apt-get update
+yes | sudo apt-get --purge autoremove && sudo apt-get autoclean
 
 # Needed for Microsoft Exchange emails.
 echo -e "\n# Needed for evolution-ews." | sudo tee -a /etc/apt/sources.list
@@ -38,14 +34,9 @@ yes | sudo apt-get install wget curl rsync plotutils gcc tcc pcc clang picard
 yes | sudo apt-get install openvpn network-manager-openvpn gnome-boxes git
 yes | sudo apt-get install libcairo2-dev gnome-builder calibre neofetch gthumb
 yes | sudo apt-get install sagemath ipython3 gnudatalanguage texlive-full vlc
-yes | sudo apt-get install obs-studio inkscape tuxguitar tuxguitar-alsa picard
-sudo apt-get update
-
-# VSCode is on snap.
-# yes | sudo snap install code --classic
-
-# Knot theory stuff.
-yes | pip install snappy snappy_15_knots
+yes | sudo apt-get install obs-studio inkscape tuxguitar tuxguitar-alsa
+yes | sudo apt-get install ardour handbrake && sudo apt-get update
+yes | pip install snappy snappy_15_knots regina
 
 # Install signal. These are the comments from signal.
 
@@ -74,7 +65,6 @@ cd ~
 
 # Needed to use Saffire pro 40. The PulseAudio drivers work, but have
 # occasional xruns. JACK, using the FFADO drivers, works perfect.
-
 # The following comments are from KX studio.
 
 # Install required dependencies if needed
@@ -101,9 +91,6 @@ echo "blacklist snd_dice" | sudo tee -a /etc/modprobe.d/alsa-nope.conf
 sudo usermod -a -G audio $(whoami)
 
 # Run this in case anything broke.
-sudo apt-get update
-yes | sudo apt-get --fix-broken install
-yes | sudo apt-get full-upgrade
-yes | sudo apt-get --purge autoremove
-sudo apt-get autoclean
-sudo reboot
+sudo apt-get update && sudo apt-get -y --fix-broken install
+sudo apt-get -y full-upgrade && sudo apt-get -y --purge autoremove
+sudo apt-get autoclean && sudo reboot

@@ -11,17 +11,13 @@ yes | sudo apt-get remove --purge debian-reference-common
 yes | sudo apt-get remove --purge fcitx fcitx-anthy fcitx-config-common fcitx5
 yes | sudo apt-get remove --purge fcitx-data fcitx5-data goldendict
 yes | sudo apt-get remove --purge khmerconverter mlterm xiterm+thai xterm
-
-# Optional, remove games from work computer.
 yes | sudo apt-get remove --purge gnome-mahjongg mah-jongg five-or-more
 yes | sudo apt-get remove --purge four-in-a-row hitori gnome-klotski iagno
 yes | sudo apt-get remove --purge gnome-mines mlterm gnome-music gnome-nibbles
 yes | sudo apt-get remove --purge quadrapassel gnome-robots gnome-sudoku
 yes | sudo apt-get remove --purge swell-foop tali gnome-taquin gnome-tetravex
 yes | sudo apt-get remove --purge lightsoff aisleriot
-yes | sudo apt-get --purge autoremove
-sudo apt-get autoclean
-sudo apt-get update
+sudo apt-get --yes --purge autoremove && sudo apt-get autoclean
 
 # Needed for Microsoft Exchange emails.
 echo -e "\n# Needed for evolution-ews." | sudo tee -a /etc/apt/sources.list
@@ -34,10 +30,7 @@ yes | sudo apt-get install wget curl rsync git plotutils gcc tcc pcc clang dkms
 yes | sudo apt-get install openvpn network-manager-openvpn gnome-boxes snapd
 yes | sudo apt-get install libcairo2-dev gnome-builder calibre neofetch gthumb
 yes | sudo apt-get install sagemath ipython3 gnudatalanguage texlive-full vlc
-yes | sudo apt-get update
-
-# VSCode is on snap.
-yes | sudo snap install code --classic
+yes | pip install snappy snappy_15_knots regina
 
 # Install signal.
 wget -O- https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
@@ -55,12 +48,17 @@ cd Linux-Magic-Trackpad-2-Driver/scripts
 chmod u+x install.sh
 sudo ./install.sh
 
-# Change directory back to downloads.
-cd ~/Downloads
+# Clone repos.
+mkdir ~/Projects/
+cd ~/Projects/
+git clone https://github.com/ryanmaguire/Mathematics-and-Physics.git
+git clone https://github.com/ryanmaguire/libtmpl.git
+git clone https://github.com/ryanmaguire/LinuxSetupScripts.git
+git clone https://github.com/NASA-Planetary-Science/rss_ringoccs.git
+git config --global credential.helper store
+cd ~
 
 # Run this in case anything broke.
-sudo apt-get update
-yes | sudo apt-get --fix-broken install
-yes | sudo apt-get autoremove
-sudo apt-get autoclean
-sudo reboot
+sudo apt-get update && sudo apt-get -y --fix-broken install
+sudo apt-get -y full-upgrade && sudo apt-get -y --purge autoremove
+sudo apt-get autoclean && sudo reboot
