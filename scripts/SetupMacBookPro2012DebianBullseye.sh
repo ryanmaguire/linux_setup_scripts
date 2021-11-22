@@ -19,19 +19,9 @@ sudo apt-get install --yes neofetch sagemath ipython3 gnudatalanguage gthumb
 sudo apt-get install --yes texlive-full calibre libcairo2-dev gnome-builder
 sudo apt-get install --yes inkscape tuxguitar tuxguitar-alsa evolution-ews
 
-# Need non-free and contrib for WiFi and graphics drivers. This assumes you
-# used the main Debian installer, and not the non-free one that has these
-# repositories already listed.
-echo -e "\n# Needed for WiFi and graphics drivers." | sudo tee -a /etc/apt/sources.list
-echo "deb http://deb.debian.org/debian/ buster contrib non-free" | sudo tee -a /etc/apt/sources.list
-echo "deb-src http://deb.debian.org/debian/ buster contrib non-free" | sudo tee -a /etc/apt/sources.list
-
-# Update pciids. This is for the WiFi card.
-sudo apt-get update && yes | sudo update-pciids
-
-# Install the WiFi drivers. You will need to restart for these to be active.
-yes | sudo apt-get install linux-headers-$(uname -r) broadcom-sta-dkms
-yes | sudo apt-get install broadcom-sta-common broadcom-sta-source
+# The WiFi and ethernet part of the laptop broke. Using a ThinkPenguin USB
+# WiFi adapter instead. This needs the following package.
+sudo apt-get install --yes firmware-ath9k-htc
 
 # Install signal. These are the comments from signal.
 
@@ -47,11 +37,6 @@ echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" |\
 
 # 3. Update your package database and install signal
 sudo apt update && sudo apt install --yes signal-desktop
-
-# Install zoom.
-wget https://zoom.us/client/latest/zoom_amd64.deb
-sudo apt-get update && sudo apt-get install --yes ./zoom_amd64.deb
-rm -f zoom_amd64.deb
 
 # Clone repos.
 mkdir ~/Projects/
