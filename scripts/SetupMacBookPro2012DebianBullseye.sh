@@ -4,20 +4,11 @@
 # OS:		Debian 11 Bullseye.
 # Device:	Mid 2012 MacBook Pro 13"
 
-# Remove several things that come pre-installed.
-yes | sudo apt-get remove --purge mozc-data hdate-applet anthy anthy-common
-yes | sudo apt-get remove --purge debian-reference debian-reference-common
-yes | sudo apt-get remove --purge debian-reference-common
-yes | sudo apt-get remove --purge fcitx fcitx-anthy fcitx-config-common fcitx5
-yes | sudo apt-get remove --purge fcitx-data fcitx5-data goldendict
-yes | sudo apt-get remove --purge khmerconverter mlterm xiterm+thai xterm
-
 # Install useful things.
 sudo apt-get update && sudo apt-get --yes full-upgrade
 sudo apt-get install --yes wget curl rsync git plotutils gcc tcc pcc clang vlc
-sudo apt-get install --yes neofetch sagemath ipython3 gnudatalanguage gthumb
-sudo apt-get install --yes texlive-full calibre libcairo2-dev gnome-builder
-sudo apt-get install --yes inkscape tuxguitar tuxguitar-alsa evolution-ews
+sudo apt-get install --yes neofetch gnudatalanguage gnome-builder tuxguitar
+sudo apt-get install --yes tuxguitar-alsa evolution-ews sagemath
 
 # The WiFi and ethernet part of the laptop broke. Using a ThinkPenguin USB
 # WiFi adapter instead. This needs the following package.

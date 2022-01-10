@@ -1,5 +1,5 @@
-Add email/Online Accounts. Microsoft and Google are normal.
-Dartmouth can be set up with evolution-ews installed.
+Add email/Online Accounts. Microsoft and Google are normal using GNOME.
+Microsoft Exchange can be set up with evolution-ews installed.
 
 Yahoo needs a special two-factor password. Go to:
   https://login.yahoo.com/account/security/app-passwords
