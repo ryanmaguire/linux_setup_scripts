@@ -1,9 +1,14 @@
+# Get the name of current kernel.
 uname -r
+
+# Find all older versions.
 dpkg --list "*linux-image*" | grep ii
+
+# Remove which ever versions you want.
 yes | sudo apt-get --purge remove linux-image-VERSION
-yes | sudo apt-get update
-yes | sudo apt-get full-upgrade
-yes | sudo apt-get --purge autoremove
-yes | sudo apt-get autoclean
+
+# Update and reboot.
+sudo apt-get update && yes | sudo apt-get full-upgrade
+yes | sudo apt-get --purge autoremove && sudo apt-get autoclean
 sudo update-grub
 sudo reboot
