@@ -10,4 +10,4 @@ wget -nc https://dl.winehq.org/wine-builds/debian/dists/bullseye/winehq-bullseye
 sudo mv winehq-bullseye.sources /etc/apt/sources.list.d/
 
 # Install
-sudo apt install --install-recommends winehq-devel
+sudo apt-get update && sudo apt install --install-recommends winehq-devel
