@@ -1,6 +1,6 @@
 # Clone repos.
-mkdir ~/Projects/
-cd ~/Projects/
+mkdir -p $HOME/Documents/Code/
+cd $HOME/Documents/Code/
 git clone https://github.com/ryanmaguire/Mathematics-and-Physics.git
 git clone https://github.com/ryanmaguire/libtmpl.git
 git clone https://github.com/ryanmaguire/LinuxSetupScripts.git
