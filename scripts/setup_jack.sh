@@ -1,19 +1,17 @@
 # Needed to use Saffire pro 40. The PulseAudio drivers work, but have
 # occasional xruns. JACK, using the FFADO drivers, works perfect.
-# The following comments are from KX studio.
+
+# Update software sources
+sudo apt-get update
 
 # Install required dependencies if needed
-yes | sudo apt-get install apt-transport-https gpgv
-
-# Remove legacy repos
-sudo dpkg --purge kxstudio-repos-gcc5
+sudo apt-get install apt-transport-https gpgv wget
 
 # Download package file
-wget https://launchpad.net/~kxstudio-debian/+archive/kxstudio/+files/kxstudio-repos_10.0.3_all.deb
+wget https://launchpad.net/~kxstudio-debian/+archive/kxstudio/+files/kxstudio-repos_11.1.0_all.deb
 
 # Install it
-yes | sudo dpkg -i kxstudio-repos_10.0.3_all.deb
-rm -f kxstudio-repos_10.0.3_all.deb
+sudo dpkg -i kxstudio-repos_11.1.0_all.deb
 
 # Now install jack and all the necessary FFADO stuff.
 sudo apt-get update
@@ -26,4 +24,11 @@ echo "blacklist snd_dice" | sudo tee -a /etc/modprobe.d/alsa-nope.conf
 sudo usermod -a -G audio $(whoami)
 
 # Music apps (DAWs, Windows plugins on Linux).
-yes | sudo apt-get install lmms ardour carla-bridge-win32 carla-bridge-win64
+yes | sudo apt-get install lmms ardour
+
+# Skip. Doesn't work anymore on Debian Bullseye.
+# carla-bridge-win64 carla-bridge-wine32 carla-bridge-wine64
+
+# Clean up.
+rm -f kxstudio-repos_11.1.0_all.deb
+sudo apt update
