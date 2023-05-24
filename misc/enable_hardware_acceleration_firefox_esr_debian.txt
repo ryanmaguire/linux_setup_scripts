@@ -1,0 +1,9 @@
+Go to about:congif
+
+Change
+
+media.ffmpeg.vaapi.enabled to true
+media.ffvpx.enabled to false
+gfx.webrender.all to true
+
+Quit firefox and restart the app.
