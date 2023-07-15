@@ -16,4 +16,4 @@ git clone https://github.com/ryanmaguire/newtonian_black_holes.git
 git clone https://github.com/ryanmaguire/ryanmaguire.github.io.git
 git clone https://github.com/ryanmaguire/spynr.git
 git clone https://github.com/NASA-Planetary-Science/rss_ringoccs.git
-git config --global credential.helper store
+#git config --global credential.helper store
