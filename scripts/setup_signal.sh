@@ -1,13 +1,22 @@
-# NOTE: These instructions only work for 64-bit Debian-based
-# Linux distributions such as Ubuntu, Mint etc.
-
-# 1. Install our official public software signing key:
+#!/bin/bash
+################################################################################
+#                                   LICENSE                                    #
+################################################################################
+#   This file is free software: you can redistribute it and/or modify          #
+#   it under the terms of the GNU General Public License as published by       #
+#   the Free Software Foundation, either version 3 of the License, or          #
+#   (at your option) any later version.                                        #
+#                                                                              #
+#   This file is distributed in the hope that it will be useful,               #
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of             #
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              #
+#   GNU General Public License for more details.                               #
+#                                                                              #
+#   You should have received a copy of the GNU General Public License          #
+#   along with this file.  If not, see <https://www.gnu.org/licenses/>.        #
+################################################################################
 wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg
 cat signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
-
-# 2. Add our repository to your list of repositories:
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' |\
   sudo tee /etc/apt/sources.list.d/signal-xenial.list
-
-# 3. Update your package database and install Signal:
-sudo apt update && sudo apt install signal-desktop
+sudo apt update && sudo apt install --yes signal-desktop

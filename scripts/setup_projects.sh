@@ -1,19 +1,25 @@
-# Clone repos.
-mkdir -p $HOME/Documents/Code/
-cd $HOME/Documents/Code/
-git clone https://github.com/ryanmaguire/complex_visual_plots.git
-git clone https://github.com/ryanmaguire/hitandmis.system.git
-git clone https://github.com/ryanmaguire/kissvg.git
-git clone https://github.com/ryanmaguire/libtmpidl.git
-git clone https://github.com/ryanmaguire/libtmpl.git
-git clone https://github.com/ryanmaguire/libtmppl.git
-git clone https://github.com/ryanmaguire/libtmpyl.git
-git clone https://github.com/ryanmaguire/LinuxSetupScripts.git
-git clone https://github.com/ryanmaguire/Mathematics-and-Physics.git
-git clone https://github.com/ryanmaguire/mandelbrot_set.git
-git clone https://github.com/ryanmaguire/newton_fractals.git
-git clone https://github.com/ryanmaguire/newtonian_black_holes.git
-git clone https://github.com/ryanmaguire/ryanmaguire.github.io.git
-git clone https://github.com/ryanmaguire/spynr.git
-git clone https://github.com/NASA-Planetary-Science/rss_ringoccs.git
-#git config --global credential.helper store
+#!/bin/bash
+################################################################################
+#                                   LICENSE                                    #
+################################################################################
+#   This file is free software: you can redistribute it and/or modify          #
+#   it under the terms of the GNU General Public License as published by       #
+#   the Free Software Foundation, either version 3 of the License, or          #
+#   (at your option) any later version.                                        #
+#                                                                              #
+#   This file is distributed in the hope that it will be useful,               #
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of             #
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              #
+#   GNU General Public License for more details.                               #
+#                                                                              #
+#   You should have received a copy of the GNU General Public License          #
+#   along with this file.  If not, see <https://www.gnu.org/licenses/>.        #
+################################################################################
+GITHUB_USERNAME=ryanmaguire
+curl "https://api.github.com/users/$GITHUB_USERNAME/repos?per_page=1000" | \
+    grep -w clone_url | \
+    grep -o '[^"]\+://.\+.git' | \
+    xargs -L1 git clone
+
+# Run this to save login info.
+# git config --global credential.helper store
