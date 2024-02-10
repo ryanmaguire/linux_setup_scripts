@@ -15,7 +15,14 @@
 #   You should have received a copy of the GNU General Public License          #
 #   along with this file.  If not, see <https://www.gnu.org/licenses/>.        #
 ################################################################################
-wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
-chmod +x winetricks
-sudo mv winetricks /usr/local/bin/
-sudo apt install --yes cabextract
+
+# Myriad of problems using a firewire device with PipeWire. Can't seem to
+# change latency, can't use FFADO drivers, numbering for the input and output
+# sockets on a Saffire Pro 40 are wrong, and most annoying can't create a sink
+# to Jack2. Going back to pulseaudio fixes this.
+sudo apt-get install --yes pulseaudio pulse-module-jack
+systemctl --user unmask pulseaudio
+systemctl --user --now disable pipewire-media-session.service
+systemctl --user --now disable pipewire pipewire-pulse
+systemctl --user --now enable pulseaudio.service pulseaudio.socket
+sudo apt-get --purge remove pipewire-audio-client-libraries
