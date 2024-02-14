@@ -20,7 +20,7 @@
 # change latency, can't use FFADO drivers, numbering for the input and output
 # sockets on a Saffire Pro 40 are wrong, and most annoying can't create a sink
 # to Jack2. Going back to pulseaudio fixes this.
-sudo apt-get install --yes pulseaudio pulse-module-jack
+sudo apt-get install --yes pulseaudio pulse-module-jack pulseaudio-module-bluetooth
 systemctl --user unmask pulseaudio
 systemctl --user --now disable pipewire-media-session.service
 systemctl --user --now disable pipewire pipewire-pulse
