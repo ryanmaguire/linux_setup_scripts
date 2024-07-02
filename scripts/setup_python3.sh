@@ -15,5 +15,5 @@
 #   You should have received a copy of the GNU General Public License          #
 #   along with this file.  If not, see <https://www.gnu.org/licenses/>.        #
 ################################################################################
-sudo apt install --yes python3 ipython3 pip3
+sudo apt install --yes python3 ipython3 python3-pip
 sudo apt update
