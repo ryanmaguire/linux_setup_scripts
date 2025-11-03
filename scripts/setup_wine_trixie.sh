@@ -15,8 +15,9 @@
 #   You should have received a copy of the GNU General Public License          #
 #   along with this file.  If not, see <https://www.gnu.org/licenses/>.        #
 ################################################################################
-sudo apt-get install --yes flang
-sudo apt-get update
-
-# This used to be needed:
-# sudo apt-get install --yes llvm-16-linker-tools
+sudo mkdir -pm755 /etc/apt/keyrings
+wget -O - https://dl.winehq.org/wine-builds/winehq.key | sudo gpg --dearmor -o /etc/apt/keyrings/winehq-archive.key -
+sudo dpkg --add-architecture i386
+sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/trixie/winehq-trixie.sources
+sudo apt update
+sudo apt install --install-recommends winehq-staging

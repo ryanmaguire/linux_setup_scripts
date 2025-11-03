@@ -15,8 +15,6 @@
 #   You should have received a copy of the GNU General Public License          #
 #   along with this file.  If not, see <https://www.gnu.org/licenses/>.        #
 ################################################################################
-sudo apt-get install --yes flang
+sudo apt-get install --yes nodejs npm
 sudo apt-get update
-
-# This used to be needed:
-# sudo apt-get install --yes llvm-16-linker-tools
+npm install typescript tsx

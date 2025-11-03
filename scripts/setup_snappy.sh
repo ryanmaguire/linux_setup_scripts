@@ -15,5 +15,10 @@
 #   You should have received a copy of the GNU General Public License          #
 #   along with this file.  If not, see <https://www.gnu.org/licenses/>.        #
 ################################################################################
-sudo apt-get install --yes python3-snappy
-sudo apt-get update
+python3 -m pip install --upgrade pip --break-system-packages
+python3 -m pip install --upgrade snappy --break-system-packages
+python3 -m pip install --upgrade snappy_15_knots --break-system-packages
+
+# This is now Google's compression library. Different snappy.
+#     sudo apt-get install --yes python3-snappy
+#     sudo apt-get update

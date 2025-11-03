@@ -15,4 +15,5 @@
 #   You should have received a copy of the GNU General Public License          #
 #   along with this file.  If not, see <https://www.gnu.org/licenses/>.        #
 ################################################################################
-sudo apt install --yes openjdk-17-jre openjdk-17-jdk
+sudo apt-get install --yes openjdk-25-jre openjdk-25-jdk
+sudo apt-get update

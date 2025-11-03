@@ -15,5 +15,5 @@
 #   You should have received a copy of the GNU General Public License          #
 #   along with this file.  If not, see <https://www.gnu.org/licenses/>.        #
 ################################################################################
-sudo apt install --yes golang gccgo
-sudo apt update
+sudo apt-get install --yes nodejs
+sudo apt-get update

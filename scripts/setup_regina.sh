@@ -15,5 +15,9 @@
 #   You should have received a copy of the GNU General Public License          #
 #   along with this file.  If not, see <https://www.gnu.org/licenses/>.        #
 ################################################################################
-sudo apt install --yes regina-normal
-sudo apt update
+python3 -m pip install --upgrade pip --break-system-packages
+python3 -m pip install regina --break-system-packages
+
+# This no longer works on Debian 13.
+#    sudo apt install --yes regina-normal
+#    sudo apt update
