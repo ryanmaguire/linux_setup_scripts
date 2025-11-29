@@ -9,3 +9,4 @@ Move frequently used apps to dock.
 Go to GNOME and set up icon bar and user preferences:
    Dash-to-Dock
    Transparent OSD
+Install sunshine self-hosted game stream host.
