@@ -15,5 +15,5 @@
 #   You should have received a copy of the GNU General Public License          #
 #   along with this file.  If not, see <https://www.gnu.org/licenses/>.        #
 ################################################################################
-sudo apt install --yes jstest-gtk
+sudo apt-get install --yes jstest-gtk
 sudo apt update
