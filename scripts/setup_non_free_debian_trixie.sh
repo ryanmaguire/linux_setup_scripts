@@ -15,14 +15,11 @@
 #   You should have received a copy of the GNU General Public License          #
 #   along with this file.  If not, see <https://www.gnu.org/licenses/>.        #
 ################################################################################
-sudo apt-get update
-sudo apt-get install apt-transport-https gpgv wget
-wget https://launchpad.net/~kxstudio-debian/+archive/kxstudio/+files/kxstudio-repos_11.2.0_all.deb
-sudo dpkg -i kxstudio-repos_11.2.0_all.deb
-sudo apt-get update
-sudo apt-get install --yes cadence carla catia
-rm -f kxstudio-repos_11.2.0_all.deb
-sudo apt update
 
-# Skip. Doesn't work anymore on Debian Bullseye.
-# carla-bridge-win64 carla-bridge-wine32 carla-bridge-wine64
+# Need non-free and contrib for WiFi and graphics drivers. This assumes you
+# used the main Debian installer, and not the non-free one that has these
+# repositories already listed.
+echo -e "\n# Needed for WiFi and graphics drivers." | sudo tee -a /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian/ trixie contrib non-free" | sudo tee -a /etc/apt/sources.list
+echo "deb-src http://deb.debian.org/debian/ trixie contrib non-free" | sudo tee -a /etc/apt/sources.list
+sudo apt-get update
